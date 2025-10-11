@@ -5,7 +5,7 @@ export default function OrderSection() {
         {/* Main CTA Section */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-            Don't miss it!
+            Don&apos;t miss it!
           </h2>
           <div className="bg-white rounded-lg shadow-lg p-8 max-w-4xl mx-auto mb-8">
             <h3 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-6">
@@ -23,7 +23,7 @@ export default function OrderSection() {
         {/* Book Description */}
         <div className="bg-white rounded-lg shadow-lg p-8 mb-12">
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
-            This is not an autobiography as I don't think my life is that interesting, and not something to spend good money on when a bottle of wine could be more beneficial! It's about my 58 years of experience with dyslexia and ADHD, how I have changed – I have a far greater understanding and respect for my gift, my neurodivergence, spicy brain. I do tell a few stories of my life but mainly to draw attention to how and why those situations happened and how it relates to me having a very spicy brain.
+            This is not an autobiography as I don&apos;t think my life is that interesting, and not something to spend good money on when a bottle of wine could be more beneficial! It&apos;s about my 58 years of experience with dyslexia and ADHD, how I have changed – I have a far greater understanding and respect for my gift, my neurodivergence, spicy brain. I do tell a few stories of my life but mainly to draw attention to how and why those situations happened and how it relates to me having a very spicy brain.
           </p>
           <p className="text-lg text-gray-700 leading-relaxed mb-8">
             I hope this adventure can help others navigate the world of Dyslexia and ADHD in a positive way.
@@ -70,7 +70,7 @@ export default function OrderSection() {
               Will be available in print, e-book, and soon to be available in Audible.
             </p>
             <ul className="text-gray-700 space-y-2">
-              <li>• The Audible edition will feature exclusive chapter reviews by the author, John O'Shea.</li>
+              <li>• The Audible edition will feature exclusive chapter reviews by the author, John O&apos;Shea.</li>
               <li>• The book will be self-published and retail for <span className="font-bold text-blue-600">$35 USD</span>. (Plus postage for print version)</li>
               <li>• Pre-orders are available at a 20% discount for <span className="font-bold text-green-600">$28 USD</span>.</li>
             </ul>

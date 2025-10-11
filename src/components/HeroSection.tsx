@@ -1,4 +1,3 @@
-import Image from 'next/image'
 
 export default function HeroSection() {
   return (
@@ -17,7 +16,7 @@ export default function HeroSection() {
               dedicated to breaking down the barriers of Dyslexia and ADHD
             </p>
             <p className="text-lg md:text-xl text-gray-600 mt-4 max-w-3xl mx-auto">
-              through the inspiring story of, <span className="font-semibold text-blue-600">John O'Shea</span>.
+              through the inspiring story of, <span className="font-semibold text-blue-600">John O&apos;Shea</span>.
             </p>
           </div>
 
@@ -27,7 +26,7 @@ export default function HeroSection() {
               <div className="w-64 h-80 bg-gradient-to-br from-blue-400 to-purple-500 rounded-lg flex items-center justify-center">
                 <div className="text-center text-white">
                   <div className="text-2xl font-bold mb-2">Neurospicy</div>
-                  <div className="text-sm">by John O'Shea</div>
+                  <div className="text-sm">by John O&apos;Shea</div>
                 </div>
               </div>
             </div>

@@ -36,7 +36,7 @@ export default function StorySubmissionForm() {
             Have you ever thought about sharing your journey with ADHD or Dyslexia?
           </p>
           <p className="text-lg text-gray-700 mb-8">
-            Maybe you've faced challenges, had unique experiences, or discovered unexpected strengths along the way. Now is your chance to become a published author—no writing experience needed!
+            Maybe you&apos;ve faced challenges, had unique experiences, or discovered unexpected strengths along the way. Now is your chance to become a published author—no writing experience needed!
           </p>
         </div>
 
@@ -46,7 +46,7 @@ export default function StorySubmissionForm() {
             Why Your Story Matters
           </h3>
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
-            The next Neurospicy book will be a collection of real-life experiences from people just like you. We want raw, honest, and powerful stories—whether they're inspiring, funny, heartbreaking, or eye-opening. This book isn't about perfect writing; it's about real voices and real experiences.
+            The next Neurospicy book will be a collection of real-life experiences from people just like you. We want raw, honest, and powerful stories—whether they&apos;re inspiring, funny, heartbreaking, or eye-opening. This book isn&apos;t about perfect writing; it&apos;s about real voices and real experiences.
           </p>
         </div>
 
@@ -55,13 +55,13 @@ export default function StorySubmissionForm() {
           <div className="bg-green-50 rounded-lg p-6">
             <h4 className="text-xl font-bold text-gray-800 mb-4">Submit Your Story</h4>
             <p className="text-gray-700">
-              Send us your experience, no matter the format or style. Don't worry about spelling or grammar—we care about your story, not how polished it is.
+              Send us your experience, no matter the format or style. Don&apos;t worry about spelling or grammar—we care about your story, not how polished it is.
             </p>
           </div>
           <div className="bg-purple-50 rounded-lg p-6">
             <h4 className="text-xl font-bold text-gray-800 mb-4">Review & Selection</h4>
             <p className="text-gray-700">
-              Our team will review all submissions. If your story is selected, we'll work with you to refine it, ensuring it stays true to your voice.
+              Our team will review all submissions. If your story is selected, we&apos;ll work with you to refine it, ensuring it stays true to your voice.
             </p>
           </div>
           <div className="bg-orange-50 rounded-lg p-6">
@@ -73,7 +73,7 @@ export default function StorySubmissionForm() {
           <div className="bg-pink-50 rounded-lg p-6">
             <h4 className="text-xl font-bold text-gray-800 mb-4">You Earn Royalties</h4>
             <p className="text-gray-700">
-              If your story is included, you'll own a percentage of the book's royalties, meaning you'll share in its success!
+              If your story is included, you&apos;ll own a percentage of the book&apos;s royalties, meaning you&apos;ll share in its success!
             </p>
           </div>
         </div>

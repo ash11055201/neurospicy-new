@@ -7,7 +7,7 @@ export default function AboutSection() {
             About John
           </h2>
           <p className="text-xl text-gray-600 italic max-w-3xl mx-auto">
-            "My mind is telling me you have already climbed this mountain so why go back?"
+            &ldquo;My mind is telling me you have already climbed this mountain so why go back?&rdquo;
           </p>
         </div>
 
@@ -23,7 +23,7 @@ export default function AboutSection() {
                 <h3 className="text-2xl font-bold text-gray-800 ml-4">Over 30 years</h3>
               </div>
               <p className="text-gray-700 leading-relaxed">
-                John authored a book on dyslexia, <span className="font-semibold">"Dyslexia: How Do We Learn"</span>, which became a bestseller for four months, selling over 15,000 copies and being released in eight countries in the 1980's.
+                John authored a book on dyslexia, <span className="font-semibold">&ldquo;Dyslexia: How Do We Learn&rdquo;</span>, which became a bestseller for four months, selling over 15,000 copies and being released in eight countries in the 1980&apos;s.
               </p>
             </div>
 
@@ -62,11 +62,11 @@ export default function AboutSection() {
             <div className="space-y-4 text-gray-700">
               <p className="flex items-start">
                 <span className="text-blue-500 mr-3">🌏</span>
-                I've lived with Aboriginals in far north Australia who now call me uncle.
+                I&apos;ve lived with Aboriginals in far north Australia who now call me uncle.
               </p>
               <p className="flex items-start">
                 <span className="text-blue-500 mr-3">✈️</span>
-                I've travelled through the Middle East with nothing but a tent, Nepal, India, Pakistan, Iran, Syria, Jordan, Israel and all before I was 24 years old.
+                I&apos;ve travelled through the Middle East with nothing but a tent, Nepal, India, Pakistan, Iran, Syria, Jordan, Israel and all before I was 24 years old.
               </p>
               <p className="flex items-start">
                 <span className="text-blue-500 mr-3">🏔️</span>
@@ -94,7 +94,7 @@ export default function AboutSection() {
             </div>
           </div>
           <p className="mt-6 text-lg">
-            Why does NASA employ dyslexic people? Their strengths translate into real-world success. They're deliberately recruited for their exceptional abilities in areas like 3D perception and creative problem-solving, skills so essential for space exploration.
+            Why does NASA employ dyslexic people? Their strengths translate into real-world success. They&apos;re deliberately recruited for their exceptional abilities in areas like 3D perception and creative problem-solving, skills so essential for space exploration.
           </p>
         </div>
       </div>
