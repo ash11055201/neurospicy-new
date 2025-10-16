@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Netlify Forms</title>
+</head>
+<body>
+  <!-- This file is required for Netlify to detect forms -->
+  <!-- The actual form is in the React component -->
+  <form name="story-submission" netlify netlify-honeypot="bot-field" hidden>
+    <input type="text" name="firstName" />
+    <input type="text" name="lastName" />
+    <input type="email" name="email" />
+    <select name="bookFormat">
+      <option value="E-Book">E-Book</option>
+      <option value="Hard Book">Hard Book</option>
+      <option value="Audio Book">Audio Book</option>
+    </select>
+    <textarea name="message" required></textarea>
+  </form>
+</body>
+</html>
