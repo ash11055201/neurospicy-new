@@ -10,7 +10,7 @@ export default function CheckoutPage() {
   const [selectedFormat, setSelectedFormat] = useState('ebook')
   const [quantity, setQuantity] = useState(1)
   const [quantityInput, setQuantityInput] = useState('1')
-  const [activeTab, setActiveTab] = useState('description')
+  const [activeTab, setActiveTab] = useState('distribution')
   const [isAnimating, setIsAnimating] = useState(false)
   const { addToCart } = useCart()
 
@@ -194,41 +194,41 @@ export default function CheckoutPage() {
           <div className="border-b border-gray-200">
             <nav className="flex space-x-8 px-6">
               <button
+                onClick={() => setActiveTab('distribution')}
+                className={`py-4 px-6 border-b-2 font-medium text-sm transition-all duration-200 cursor-pointer hover:bg-gray-50 hover:scale-105 ${
+                  activeTab === 'distribution'
+                    ? 'border-orange-500 text-orange-600 bg-orange-50'
+                    : 'border-transparent text-gray-500 hover:text-orange-500 hover:border-orange-300'
+                }`}
+              >
+                Distribution
+              </button>
+              <button
                 onClick={() => setActiveTab('description')}
-                className={`py-4 px-1 border-b-2 font-medium text-sm ${
+                className={`py-4 px-6 border-b-2 font-medium text-sm transition-all duration-200 cursor-pointer hover:bg-gray-50 hover:scale-105 ${
                   activeTab === 'description'
-                    ? 'border-orange-500 text-orange-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                    ? 'border-orange-500 text-orange-600 bg-orange-50'
+                    : 'border-transparent text-gray-500 hover:text-orange-500 hover:border-orange-300'
                 }`}
               >
                 Description
               </button>
               <button
                 onClick={() => setActiveTab('additional')}
-                className={`py-4 px-1 border-b-2 font-medium text-sm ${
+                className={`py-4 px-6 border-b-2 font-medium text-sm transition-all duration-200 cursor-pointer hover:bg-gray-50 hover:scale-105 ${
                   activeTab === 'additional'
-                    ? 'border-orange-500 text-orange-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                    ? 'border-orange-500 text-orange-600 bg-orange-50'
+                    : 'border-transparent text-gray-500 hover:text-orange-500 hover:border-orange-300'
                 }`}
               >
                 Additional Information
               </button>
               <button
-                onClick={() => setActiveTab('distribution')}
-                className={`py-4 px-1 border-b-2 font-medium text-sm ${
-                  activeTab === 'distribution'
-                    ? 'border-orange-500 text-orange-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                }`}
-              >
-                Distribution
-              </button>
-              <button
                 onClick={() => setActiveTab('reviews')}
-                className={`py-4 px-1 border-b-2 font-medium text-sm ${
+                className={`py-4 px-6 border-b-2 font-medium text-sm transition-all duration-200 cursor-pointer hover:bg-gray-50 hover:scale-105 ${
                   activeTab === 'reviews'
-                    ? 'border-orange-500 text-orange-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                    ? 'border-orange-500 text-orange-600 bg-orange-50'
+                    : 'border-transparent text-gray-500 hover:text-orange-500 hover:border-orange-300'
                 }`}
               >
                 Reviews (0)
@@ -312,7 +312,7 @@ export default function CheckoutPage() {
 
                 {/* Library Submission */}
                 <div>
-                  <h4 className="text-lg font-semibold text-gray-800 mb-4">Library Submission over 30K plus Libraries through:</h4>
+                  <h4 className="text-lg font-semibold text-gray-800 mb-4">Library Submission:</h4>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                     {['Bakers & Taylor', 'Bibliotheca', 'OverDrive'].map((platform) => (
                       <div key={platform} className="bg-purple-50 border border-purple-200 rounded-lg p-4 text-center">
