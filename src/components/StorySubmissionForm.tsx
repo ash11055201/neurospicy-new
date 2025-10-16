@@ -26,25 +26,45 @@ export default function StorySubmissionForm() {
     }
 
     try {
-      // Submit to Netlify
+      // Method 1: Try FormData approach first
+      const formDataToSubmit = new FormData()
+      formDataToSubmit.append('form-name', 'story-submission')
+      formDataToSubmit.append('firstName', formData.firstName.trim())
+      formDataToSubmit.append('lastName', formData.lastName.trim())
+      formDataToSubmit.append('email', formData.email.trim())
+      formDataToSubmit.append('bookFormat', formData.bookFormat)
+      formDataToSubmit.append('message', formData.message.trim())
+
       const response = await fetch('/', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({
-          'form-name': 'story-submission',
-          'firstName': formData.firstName.trim(),
-          'lastName': formData.lastName.trim(),
-          'email': formData.email.trim(),
-          'bookFormat': formData.bookFormat,
-          'message': formData.message.trim()
-        }).toString()
+        body: formDataToSubmit
       })
 
       if (response.ok) {
         // Redirect to success page
         window.location.href = '/story-success'
       } else {
-        throw new Error('Form submission failed')
+        // Fallback: Try URL-encoded approach
+        const urlEncodedData = new URLSearchParams({
+          'form-name': 'story-submission',
+          'firstName': formData.firstName.trim(),
+          'lastName': formData.lastName.trim(),
+          'email': formData.email.trim(),
+          'bookFormat': formData.bookFormat,
+          'message': formData.message.trim()
+        })
+
+        const fallbackResponse = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: urlEncodedData.toString()
+        })
+
+        if (fallbackResponse.ok) {
+          window.location.href = '/story-success'
+        } else {
+          throw new Error('Form submission failed')
+        }
       }
     } catch (error) {
       console.error('Form submission error:', error)
@@ -154,6 +174,7 @@ export default function StorySubmissionForm() {
 
           <form 
             name="story-submission" 
+            method="POST" 
             data-netlify="true" 
             data-netlify-honeypot="bot-field"
             onSubmit={handleSubmit} 
