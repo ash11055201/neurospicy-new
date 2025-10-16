@@ -20,11 +20,6 @@ export default function CheckoutPage() {
     hardcover: 40.00
   }
 
-  const handleCheckout = () => {
-    // Here you would integrate with your payment processor
-    // For now, we'll just show an alert
-    alert(`Redirecting to payment for ${quantity} ${selectedFormat}(s) - $${(pricing[selectedFormat as keyof typeof pricing] * quantity).toFixed(2)}`)
-  }
 
   const handleGooglePay = () => {
     alert('Google Pay integration would go here')
@@ -89,7 +84,7 @@ export default function CheckoutPage() {
             <div className="text-sm text-gray-500 mb-2">Books</div>
             
             {/* Title */}
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">Neurospicy by John O'Shea</h2>
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">Neurospicy by John O&apos;Shea</h2>
             
             {/* Price */}
             <div className="text-3xl font-bold text-orange-600 mb-6">${pricing[selectedFormat as keyof typeof pricing]}</div>
@@ -247,7 +242,7 @@ export default function CheckoutPage() {
                   </div>
                   <div>
                     <span className="font-medium text-gray-700">Dimensions:</span>
-                    <span className="ml-2 text-gray-600">5.5" x 8.5"</span>
+                    <span className="ml-2 text-gray-600">5.5&ldquo; x 8.5&rdquo;</span>
                   </div>
                 </div>
               </div>
@@ -338,10 +333,10 @@ export default function CheckoutPage() {
           <div className="p-6 border-t border-gray-200">
             <h3 className="text-lg font-semibold text-gray-800 mb-3">About Neurospicy</h3>
             <p className="text-gray-700 leading-relaxed mb-4 italic">
-              "The rollercoaster of success and failure that had defined my journey was now compounded by the battles I fought every day—ADHD and dyslexia, lifelong companions that shaped my struggles in ways only a few understood."
+              &ldquo;The rollercoaster of success and failure that had defined my journey was now compounded by the battles I fought every day—ADHD and dyslexia, lifelong companions that shaped my struggles in ways only a few understood.&rdquo;
             </p>
             <p className="text-gray-700 leading-relaxed mb-4">
-              This book is more than a memoir; it's an unfiltered exploration to understand myself. When traditional lifelines—friends, family, even counselors—fell short, I had no choice but to turn inward. What began as a desperate search for answers became a transformative quest: to unravel the mysteries of my mind, to confront the stigma of neurodiversity, and to reclaim control over my life.
+              This book is more than a memoir; it&apos;s an unfiltered exploration to understand myself. When traditional lifelines—friends, family, even counselors—fell short, I had no choice but to turn inward. What began as a desperate search for answers became a transformative quest: to unravel the mysteries of my mind, to confront the stigma of neurodiversity, and to reclaim control over my life.
             </p>
           </div>
         </div>
