@@ -283,7 +283,7 @@ export default function CheckoutPage() {
 
                 {/* Paperback Submission */}
                 <div>
-                  <h4 className="text-lg font-semibold text-gray-800 mb-4">Paperback Submission over:</h4>
+                  <h4 className="text-lg font-semibold text-gray-800 mb-4">Paperback:</h4>
                   <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
                     {['Adlibris', 'Agapea', 'Amazon.co.uk', 'Aphrohead', 'Blackwell', 'Book Depository Ltd', 'Books Express', 'Coutts Information Services Ltd', 'Designarta Books', 'Eden Interactive Ltd', 'Foyles', 'Gardners', 'Trust Media Distribution (formerly STL)', 'Mallory International', 'Paperback Shop Ltd', 'Superbookdeals', 'The Book Community Ltd', 'Waterstones', 'Wrap Distribution'].map((platform) => (
                       <div key={platform} className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-center">
@@ -295,7 +295,7 @@ export default function CheckoutPage() {
 
                 {/* Ebook Submission */}
                 <div>
-                  <h4 className="text-lg font-semibold text-gray-800 mb-4">Ebook Submission over:</h4>
+                  <h4 className="text-lg font-semibold text-gray-800 mb-4">Ebook:</h4>
                   <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
                     {['24Symbols', 'Ainosco', 'Amazon*', 'Apple**', 'Barnes & Noble Nook', 'Bibliotheca', 'BibliU', 'Bolinda', 'Bookmate', 'Chegg', 'De Marque', 'eBooks.com', 'EBSCO', 'fable', 'Follett/B&T', 'Gardners', 'Glose', 'hoopla', 'Hummingbird', 'iGroup', 'ITSI', 'Kobo Plus', 'Kortex', 'Libreka', 'Libri.de', 'LitRes', 'Mackin', 'Odilo', 'OverDrive', 'Perlego', 'Perusall', 'ProQuest', 'Publica.la', 'RedShelf', 'Scribd', 'SpoonRead', 'Storytel', 'VitalSource', 'WF Howes', 'Wheelers', 'Wook', 'YouScribe'].map((platform) => (
                       <div key={platform} className="bg-green-50 border border-green-200 rounded-lg p-3 text-center">
@@ -307,7 +307,7 @@ export default function CheckoutPage() {
 
                 {/* Library Submission */}
                 <div>
-                  <h4 className="text-lg font-semibold text-gray-800 mb-4">Library Submission:</h4>
+                  <h4 className="text-lg font-semibold text-gray-800 mb-4">Library:</h4>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                     {['Bakers & Taylor', 'Bibliotheca', 'OverDrive'].map((platform) => (
                       <div key={platform} className="bg-purple-50 border border-purple-200 rounded-lg p-4 text-center">
