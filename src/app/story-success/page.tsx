@@ -35,7 +35,7 @@ export default function StorySubmissionSuccess() {
                 </div>
                 <div className="bg-white rounded-lg p-4 shadow-sm">
                   <div className="text-orange-600 font-bold text-lg mb-2">2. Selection</div>
-                  <p className="text-gray-700 text-sm">If selected, we'll work with you to refine your story</p>
+                  <p className="text-gray-700 text-sm">If selected, we&apos;ll work with you to refine your story</p>
                 </div>
                 <div className="bg-white rounded-lg p-4 shadow-sm">
                   <div className="text-orange-600 font-bold text-lg mb-2">3. Publication</div>

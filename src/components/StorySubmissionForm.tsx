@@ -26,20 +26,18 @@ export default function StorySubmissionForm() {
     }
 
     try {
-      // Create FormData for Netlify submission
-      const formDataToSubmit = new FormData()
-      formDataToSubmit.append('form-name', 'story-submission')
-      formDataToSubmit.append('firstName', formData.firstName.trim())
-      formDataToSubmit.append('lastName', formData.lastName.trim())
-      formDataToSubmit.append('email', formData.email.trim())
-      formDataToSubmit.append('bookFormat', formData.bookFormat)
-      formDataToSubmit.append('message', formData.message.trim())
-
       // Submit to Netlify
       const response = await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formDataToSubmit as any).toString()
+        body: new URLSearchParams({
+          'form-name': 'story-submission',
+          'firstName': formData.firstName.trim(),
+          'lastName': formData.lastName.trim(),
+          'email': formData.email.trim(),
+          'bookFormat': formData.bookFormat,
+          'message': formData.message.trim()
+        }).toString()
       })
 
       if (response.ok) {
@@ -165,7 +163,7 @@ export default function StorySubmissionForm() {
             <input type="hidden" name="form-name" value="story-submission" />
             <div style={{ display: 'none' }}>
               <label>
-                Don't fill this out if you're human: <input name="bot-field" />
+                Don&apos;t fill this out if you&apos;re human: <input name="bot-field" />
               </label>
             </div>
             <div className="grid md:grid-cols-2 gap-6">
