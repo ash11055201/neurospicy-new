@@ -18,13 +18,21 @@ export default function Navigation() {
       router.push(`/#${section}`)
     } else {
       // If on home page, scroll to section
-      const element = document.getElementById(section)
-      if (element) {
-        const offsetTop = element.offsetTop - 80
+      if (section === 'home') {
+        // Scroll to top of page
         window.scrollTo({
-          top: offsetTop,
+          top: 0,
           behavior: 'smooth'
         })
+      } else {
+        const element = document.getElementById(section)
+        if (element) {
+          const offsetTop = element.offsetTop - 80
+          window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+          })
+        }
       }
     }
     setIsMenuOpen(false) // Close mobile menu
@@ -97,9 +105,9 @@ export default function Navigation() {
         {isMenuOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
-              <Link href="/" className="text-gray-800 hover:text-orange-600 hover:bg-orange-50 block px-3 py-2 text-base font-medium transition-all duration-200 rounded-lg cursor-pointer">
+              <button onClick={() => handleNavigation('home')} className="text-gray-800 hover:text-orange-600 hover:bg-orange-50 block px-3 py-2 text-base font-medium transition-all duration-200 rounded-lg cursor-pointer w-full text-left">
                 Home
-              </Link>
+              </button>
               <button onClick={() => handleNavigation('about')} className="text-gray-800 hover:text-orange-600 hover:bg-orange-50 block px-3 py-2 text-base font-medium transition-all duration-200 rounded-lg cursor-pointer w-full text-left">
                 About Me
               </button>

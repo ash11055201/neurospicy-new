@@ -57,16 +57,16 @@ export default function CheckoutPage() {
           <p className="text-gray-600">Complete your purchase</p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-8">
           {/* Left Column - Book Cover */}
-          <div className="bg-white rounded-lg shadow-lg p-6">
-            <div className="relative">
+          <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6">
+            <div className="relative max-w-sm mx-auto">
               <Image
                 src="/book-cover.jpg"
                 alt="Neurospicy Book Cover by John O'Shea"
-                width={400}
-                height={600}
-                className="rounded-lg shadow-lg mx-auto"
+                width={300}
+                height={450}
+                className="rounded-lg shadow-lg w-full h-auto"
                 priority
               />
               {/* Magnifying glass icon */}
@@ -79,15 +79,15 @@ export default function CheckoutPage() {
           </div>
 
           {/* Right Column - Product Info & Purchase */}
-          <div className="bg-white rounded-lg shadow-lg p-6">
+          <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6">
             {/* Category */}
             <div className="text-sm text-gray-500 mb-2">Books</div>
             
             {/* Title */}
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">Neurospicy by John O&apos;Shea</h2>
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">Neurospicy by John O&apos;Shea</h2>
             
             {/* Price */}
-            <div className="text-3xl font-bold text-orange-600 mb-6">${pricing[selectedFormat as keyof typeof pricing]}</div>
+            <div className="text-2xl sm:text-3xl font-bold text-orange-600 mb-6">${pricing[selectedFormat as keyof typeof pricing]}</div>
             
             {/* Format Selection */}
             <div className="mb-6">
@@ -104,7 +104,7 @@ export default function CheckoutPage() {
             </div>
 
             {/* Quantity and Add to Cart */}
-            <div className="flex gap-4 mb-6">
+            <div className="flex flex-col sm:flex-row gap-4 mb-6">
               <div className="flex-1">
                 <label className="block text-sm font-medium text-gray-700 mb-2">Quantity</label>
                 <input
@@ -134,10 +134,11 @@ export default function CheckoutPage() {
                   className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-black"
                 />
               </div>
-              <div className="flex items-end relative">
+              <div className="flex-1 sm:flex-none sm:self-end relative">
+                <label className="block text-sm font-medium text-gray-700 mb-2 sm:hidden">Add to Cart</label>
                 <button 
                   onClick={handleAddToCart}
-                  className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer"
+                  className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer text-sm sm:text-base"
                 >
                   ADD TO CART
                 </button>
@@ -158,10 +159,10 @@ export default function CheckoutPage() {
             </div>
 
             {/* Payment Options */}
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               <button
                 onClick={handleGooglePay}
-                className="w-full bg-black hover:bg-gray-800 text-white font-bold py-4 px-6 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer flex items-center justify-center gap-2"
+                className="w-full bg-black hover:bg-gray-800 text-white font-bold py-3 sm:py-4 px-4 sm:px-6 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 text-sm sm:text-base"
               >
                 <span className="text-white font-bold">G</span>
                 <span>Pay</span>
@@ -169,7 +170,7 @@ export default function CheckoutPage() {
               
               <button
                 onClick={handlePayPal}
-                className="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-4 px-6 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer flex items-center justify-center gap-2"
+                className="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 sm:py-4 px-4 sm:px-6 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 text-sm sm:text-base"
               >
                 <span className="text-blue-600 font-bold">PayPal</span>
               </button>
@@ -187,10 +188,10 @@ export default function CheckoutPage() {
         <div className="bg-white rounded-lg shadow-lg">
           {/* Tab Navigation */}
           <div className="border-b border-gray-200">
-            <nav className="flex space-x-8 px-6">
+            <nav className="flex overflow-x-auto space-x-2 px-4 sm:px-6 scrollbar-hide">
               <button
                 onClick={() => setActiveTab('distribution')}
-                className={`py-4 px-6 border-b-2 font-medium text-sm transition-all duration-200 cursor-pointer hover:bg-gray-50 hover:scale-105 ${
+                className={`py-3 px-4 sm:py-4 sm:px-6 border-b-2 font-medium text-xs sm:text-sm transition-all duration-200 cursor-pointer hover:bg-gray-50 hover:scale-105 whitespace-nowrap ${
                   activeTab === 'distribution'
                     ? 'border-orange-500 text-orange-600 bg-orange-50'
                     : 'border-transparent text-gray-500 hover:text-orange-500 hover:border-orange-300'
@@ -200,7 +201,7 @@ export default function CheckoutPage() {
               </button>
               <button
                 onClick={() => setActiveTab('description')}
-                className={`py-4 px-6 border-b-2 font-medium text-sm transition-all duration-200 cursor-pointer hover:bg-gray-50 hover:scale-105 ${
+                className={`py-3 px-4 sm:py-4 sm:px-6 border-b-2 font-medium text-xs sm:text-sm transition-all duration-200 cursor-pointer hover:bg-gray-50 hover:scale-105 whitespace-nowrap ${
                   activeTab === 'description'
                     ? 'border-orange-500 text-orange-600 bg-orange-50'
                     : 'border-transparent text-gray-500 hover:text-orange-500 hover:border-orange-300'
@@ -210,17 +211,17 @@ export default function CheckoutPage() {
               </button>
               <button
                 onClick={() => setActiveTab('additional')}
-                className={`py-4 px-6 border-b-2 font-medium text-sm transition-all duration-200 cursor-pointer hover:bg-gray-50 hover:scale-105 ${
+                className={`py-3 px-4 sm:py-4 sm:px-6 border-b-2 font-medium text-xs sm:text-sm transition-all duration-200 cursor-pointer hover:bg-gray-50 hover:scale-105 whitespace-nowrap ${
                   activeTab === 'additional'
                     ? 'border-orange-500 text-orange-600 bg-orange-50'
                     : 'border-transparent text-gray-500 hover:text-orange-500 hover:border-orange-300'
                 }`}
               >
-                Additional Information
+                Additional Info
               </button>
               <button
                 onClick={() => setActiveTab('reviews')}
-                className={`py-4 px-6 border-b-2 font-medium text-sm transition-all duration-200 cursor-pointer hover:bg-gray-50 hover:scale-105 ${
+                className={`py-3 px-4 sm:py-4 sm:px-6 border-b-2 font-medium text-xs sm:text-sm transition-all duration-200 cursor-pointer hover:bg-gray-50 hover:scale-105 whitespace-nowrap ${
                   activeTab === 'reviews'
                     ? 'border-orange-500 text-orange-600 bg-orange-50'
                     : 'border-transparent text-gray-500 hover:text-orange-500 hover:border-orange-300'
@@ -232,7 +233,7 @@ export default function CheckoutPage() {
           </div>
 
           {/* Tab Content */}
-          <div className="p-6">
+          <div className="p-4 sm:p-6">
             {activeTab === 'description' && (
               <div className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -272,10 +273,10 @@ export default function CheckoutPage() {
                 {/* Platforms */}
                 <div>
                   <h4 className="text-lg font-semibold text-gray-800 mb-4">Platforms:</h4>
-                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3">
                     {['Amazon', 'B&N', 'Kobo', 'iBooks', 'Scribd', 'Tolino', 'Walmart', 'Target', 'Chapter'].map((platform) => (
-                      <div key={platform} className="bg-orange-50 border border-orange-200 rounded-lg p-3 text-center">
-                        <span className="text-gray-700 font-medium">{platform}</span>
+                      <div key={platform} className="bg-orange-50 border border-orange-200 rounded-lg p-2 sm:p-3 text-center">
+                        <span className="text-gray-700 font-medium text-xs sm:text-sm">{platform}</span>
                       </div>
                     ))}
                   </div>
@@ -284,7 +285,7 @@ export default function CheckoutPage() {
                 {/* Paperback Submission */}
                 <div>
                   <h4 className="text-lg font-semibold text-gray-800 mb-4">Paperback:</h4>
-                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3">
                     {['Adlibris', 'Agapea', 'Amazon.co.uk', 'Aphrohead', 'Blackwell', 'Book Depository Ltd', 'Books Express', 'Coutts Information Services Ltd', 'Designarta Books', 'Eden Interactive Ltd', 'Foyles', 'Gardners', 'Trust Media Distribution (formerly STL)', 'Mallory International', 'Paperback Shop Ltd', 'Superbookdeals', 'The Book Community Ltd', 'Waterstones', 'Wrap Distribution'].map((platform) => (
                       <div key={platform} className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-center">
                         <span className="text-gray-700 font-medium text-sm">{platform}</span>
@@ -296,7 +297,7 @@ export default function CheckoutPage() {
                 {/* Ebook Submission */}
                 <div>
                   <h4 className="text-lg font-semibold text-gray-800 mb-4">Ebook:</h4>
-                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3">
                     {['24Symbols', 'Ainosco', 'Amazon*', 'Apple**', 'Barnes & Noble Nook', 'Bibliotheca', 'BibliU', 'Bolinda', 'Bookmate', 'Chegg', 'De Marque', 'eBooks.com', 'EBSCO', 'fable', 'Follett/B&T', 'Gardners', 'Glose', 'hoopla', 'Hummingbird', 'iGroup', 'ITSI', 'Kobo Plus', 'Kortex', 'Libreka', 'Libri.de', 'LitRes', 'Mackin', 'Odilo', 'OverDrive', 'Perlego', 'Perusall', 'ProQuest', 'Publica.la', 'RedShelf', 'Scribd', 'SpoonRead', 'Storytel', 'VitalSource', 'WF Howes', 'Wheelers', 'Wook', 'YouScribe'].map((platform) => (
                       <div key={platform} className="bg-green-50 border border-green-200 rounded-lg p-3 text-center">
                         <span className="text-gray-700 font-medium text-sm">{platform}</span>
