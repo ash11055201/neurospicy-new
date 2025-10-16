@@ -1,52 +1,92 @@
 
-export default function HeroSection() {
-  return (
-    <section className="bg-gradient-to-br from-blue-50 to-indigo-100 py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          {/* Welcome Text */}
-          <div className="mb-8">
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-800 mb-4">
-              Welcome to
-            </h1>
-            <h2 className="text-5xl md:text-7xl font-bold text-blue-600 mb-6">
-              Neurospicy
-            </h2>
-            <p className="text-xl md:text-2xl text-gray-700 max-w-4xl mx-auto leading-relaxed">
-              dedicated to breaking down the barriers of Dyslexia and ADHD
-            </p>
-            <p className="text-lg md:text-xl text-gray-600 mt-4 max-w-3xl mx-auto">
-              through the inspiring story of, <span className="font-semibold text-blue-600">John O&apos;Shea</span>.
-            </p>
-          </div>
+"use client"
 
-          {/* Book Cover Placeholder */}
-          <div className="mb-8">
-            <div className="inline-block bg-white rounded-lg shadow-2xl p-8 transform hover:scale-105 transition-transform duration-300">
-              <div className="w-64 h-80 bg-gradient-to-br from-blue-400 to-purple-500 rounded-lg flex items-center justify-center">
-                <div className="text-center text-white">
-                  <div className="text-2xl font-bold mb-2">Neurospicy</div>
-                  <div className="text-sm">by John O&apos;Shea</div>
-                </div>
-              </div>
+import Image from 'next/image'
+
+export default function HeroSection() {
+  const handleDownloadSample = () => {
+    // Create a link element to trigger download
+    const link = document.createElement('a');
+    link.href = '/jigzaw-book-exstrate.docx';
+    link.download = 'Neurospicy-Sample.docx';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  return (
+    <section className="bg-gradient-to-br from-orange-50 via-red-50 to-yellow-50 py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left Column - Text Content */}
+          <div className="text-center lg:text-left">
+            {/* Welcome Text */}
+            <div className="mb-8">
+              <h1 className="text-4xl md:text-6xl font-bold text-gray-800 mb-4">
+                Welcome to
+              </h1>
+              <h2 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent mb-4">
+                Neurospicy
+              </h2>
+              <h3 className="text-lg md:text-xl font-semibold text-gray-600 mb-6 italic">
+                A Memoir Of Madness, Magic ADHD and Dyslexia
+              </h3>
+              <p className="text-xl md:text-2xl text-gray-700 max-w-4xl mx-auto lg:mx-0 leading-relaxed">
+                Dedicated to breaking down the barriers of Dyslexia and ADHD through the inspiring story of, <span className="font-semibold text-orange-600">John O&apos;Shea</span>.
+              </p>
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="mb-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <button 
+                onClick={handleDownloadSample}
+                className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white font-bold py-4 px-8 rounded-full text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer"
+              >
+                Read Sample Now
+              </button>
+              <button 
+                onClick={() => window.location.href = '/checkout'}
+                className="bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white font-bold py-4 px-8 rounded-full text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer"
+              >
+                Get the Book Now
+              </button>
+            </div>
+
+            {/* Main Quote */}
+            <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-lg p-6 max-w-4xl mx-auto lg:mx-0">
+              <h3 className="text-xl md:text-2xl font-semibold text-red-600 mb-4">
+                In my experience
+              </h3>
+              <p className="text-base md:text-lg text-gray-700 leading-relaxed">
+                Success and failure are two sides of the same coin. By sharing my personal experiences of both, especially as they relate to my dyslexia and ADHD (which I playfully call Spicy in the book), I hope to offer useful insights to others.
+              </p>
             </div>
           </div>
 
-          {/* CTA Button */}
-          <div className="mb-12">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-full text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
-              Read Sample Now
-            </button>
-          </div>
-
-          {/* Main Quote */}
-          <div className="bg-white rounded-lg shadow-lg p-8 max-w-4xl mx-auto">
-            <h3 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-6">
-              I have faced
-            </h3>
-            <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
-              the highs of success and the lows of failure, and I hope by sharing some of these ups and downs and how it related to my Dyslexia and ADHD which I refer in the book being Spicy, it might help others.
-            </p>
+          {/* Right Column - Book Cover */}
+          <div className="flex justify-center lg:justify-end">
+            <div className="relative">
+              {/* Book Cover with Enhanced Shadow */}
+              <div className="bg-white rounded-2xl shadow-2xl p-6 transform hover:scale-105 transition-transform duration-500 hover:shadow-3xl">
+                <div className="relative">
+                  <Image
+                    src="/book-cover.jpg"
+                    alt="Neurospicy Book Cover by John O'Shea"
+                    width={400}
+                    height={750}
+                    className="rounded-lg shadow-lg"
+                    priority
+                  />
+                  {/* Decorative Elements */}
+                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-orange-500 rounded-full animate-pulse"></div>
+                  <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-red-500 rounded-full animate-pulse delay-300"></div>
+                </div>
+              </div>
+              
+              {/* Floating Elements */}
+              <div className="absolute -top-4 -left-4 w-8 h-8 bg-yellow-400 rounded-full opacity-60 animate-bounce"></div>
+              <div className="absolute -bottom-4 -right-4 w-6 h-6 bg-orange-400 rounded-full opacity-60 animate-bounce delay-500"></div>
+            </div>
           </div>
         </div>
       </div>
