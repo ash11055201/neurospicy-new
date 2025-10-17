@@ -13,64 +13,17 @@ export default function StorySubmissionForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    setSubmitStatus('idle')
-
+  const handleSubmit = (e: React.FormEvent) => {
     // Basic validation
     if (!formData.firstName.trim() || !formData.lastName.trim() || !formData.email.trim() || !formData.bookFormat || !formData.message.trim()) {
+      e.preventDefault()
       setSubmitStatus('error')
-      setIsSubmitting(false)
       return
     }
 
-    try {
-      // Method 1: Try FormData approach first
-      const formDataToSubmit = new FormData()
-      formDataToSubmit.append('form-name', 'story-submission')
-      formDataToSubmit.append('firstName', formData.firstName.trim())
-      formDataToSubmit.append('lastName', formData.lastName.trim())
-      formDataToSubmit.append('email', formData.email.trim())
-      formDataToSubmit.append('bookFormat', formData.bookFormat)
-      formDataToSubmit.append('message', formData.message.trim())
-
-      const response = await fetch('/', {
-        method: 'POST',
-        body: formDataToSubmit
-      })
-
-      if (response.ok) {
-        // Redirect to success page
-        window.location.href = '/story-success'
-      } else {
-        // Fallback: Try URL-encoded approach
-        const urlEncodedData = new URLSearchParams({
-          'form-name': 'story-submission',
-          'firstName': formData.firstName.trim(),
-          'lastName': formData.lastName.trim(),
-          'email': formData.email.trim(),
-          'bookFormat': formData.bookFormat,
-          'message': formData.message.trim()
-        })
-
-        const fallbackResponse = await fetch('/', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: urlEncodedData.toString()
-        })
-
-        if (fallbackResponse.ok) {
-          window.location.href = '/story-success'
-        } else {
-          throw new Error('Form submission failed')
-        }
-      }
-    } catch (error) {
-      console.error('Form submission error:', error)
-      setSubmitStatus('error')
-      setIsSubmitting(false)
-    }
+    // Let Netlify handle the form submission natively
+    // Don't prevent default - let the form submit naturally
+    setIsSubmitting(true)
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -177,6 +130,7 @@ export default function StorySubmissionForm() {
             method="POST" 
             data-netlify="true" 
             data-netlify-honeypot="bot-field"
+            action="/story-success"
             onSubmit={handleSubmit} 
             className="space-y-6"
           >
