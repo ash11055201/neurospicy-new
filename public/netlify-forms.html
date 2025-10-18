@@ -6,7 +6,8 @@
 <body>
   <!-- This file is required for Netlify to detect forms -->
   <!-- The actual form is in the React component -->
-  <form name="story-submission" netlify netlify-honeypot="bot-field" hidden>
+  <form name="story-submission" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+    <input type="hidden" name="form-name" value="story-submission" />
     <input type="text" name="firstName" />
     <input type="text" name="lastName" />
     <input type="email" name="email" />
@@ -15,7 +16,12 @@
       <option value="Hard Book">Hard Book</option>
       <option value="Audio Book">Audio Book</option>
     </select>
-    <textarea name="message" required></textarea>
+    <textarea name="message"></textarea>
+    <div style="display: none;">
+      <label>
+        Don't fill this out if you're human: <input name="bot-field" />
+      </label>
+    </div>
   </form>
 </body>
 </html>

@@ -12,18 +12,77 @@ export default function StorySubmissionForm() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [debugMode, setDebugMode] = useState(false)
+  const [debugInfo, setDebugInfo] = useState<string>('')
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    
     // Basic validation
     if (!formData.firstName.trim() || !formData.lastName.trim() || !formData.email.trim() || !formData.bookFormat || !formData.message.trim()) {
-      e.preventDefault()
       setSubmitStatus('error')
       return
     }
 
-    // Let Netlify handle the form submission natively
-    // Don't prevent default - let the form submit naturally
     setIsSubmitting(true)
+    setSubmitStatus('idle')
+
+    try {
+      // Prepare form data
+      const formDataToSend = {
+        'form-name': 'story-submission',
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        bookFormat: formData.bookFormat,
+        message: formData.message
+      }
+
+      // Debug logging
+      console.log('Submitting form data:', formDataToSend)
+      
+      if (debugMode) {
+        setDebugInfo(`Submitting: ${JSON.stringify(formDataToSend, null, 2)}`)
+      }
+
+      // Submit to Netlify
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formDataToSend).toString()
+      })
+
+      console.log('Response status:', response.status)
+      console.log('Response headers:', Object.fromEntries(response.headers.entries()))
+
+      if (debugMode) {
+        setDebugInfo(prev => prev + `\nResponse: ${response.status} ${response.statusText}`)
+      }
+
+      if (response.ok) {
+        setSubmitStatus('success')
+        console.log('Form submitted successfully!')
+        if (debugMode) {
+          setDebugInfo(prev => prev + '\n✅ Form submitted successfully!')
+        }
+        // Redirect to success page after a short delay
+        setTimeout(() => {
+          window.location.href = '/story-success'
+        }, 2000)
+      } else {
+        const responseText = await response.text()
+        console.error('Form submission failed:', response.status, responseText)
+        if (debugMode) {
+          setDebugInfo(prev => prev + `\n❌ Error: ${response.status} - ${responseText}`)
+        }
+        throw new Error(`Form submission failed: ${response.status}`)
+      }
+    } catch (error) {
+      console.error('Form submission error:', error)
+      setSubmitStatus('error')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -88,9 +147,18 @@ export default function StorySubmissionForm() {
 
         {/* Form */}
         <div className="bg-white/90 backdrop-blur-sm rounded-lg p-8 shadow-xl border-t-4 border-orange-500">
-          <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-            No Experience? <span className="text-orange-600">No Problem!</span>
-          </h3>
+          <div className="flex justify-between items-center mb-6">
+            <h3 className="text-2xl font-bold text-gray-800">
+              No Experience? <span className="text-orange-600">No Problem!</span>
+            </h3>
+            <button
+              type="button"
+              onClick={() => setDebugMode(!debugMode)}
+              className="text-xs bg-gray-200 hover:bg-gray-300 text-gray-700 px-2 py-1 rounded"
+            >
+              {debugMode ? 'Hide Debug' : 'Debug Mode'}
+            </button>
+          </div>
           
           {/* Success Message */}
           {submitStatus === 'success' && (
@@ -120,8 +188,23 @@ export default function StorySubmissionForm() {
                   <p className="text-red-700 text-sm mt-1">
                     Please make sure all required fields are filled out and try again.
                   </p>
+                  {debugMode && debugInfo && (
+                    <pre className="text-xs text-red-600 mt-2 bg-red-100 p-2 rounded overflow-auto">
+                      {debugInfo}
+                    </pre>
+                  )}
                 </div>
               </div>
+            </div>
+          )}
+
+          {/* Debug Info */}
+          {debugMode && debugInfo && submitStatus !== 'error' && (
+            <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+              <h4 className="text-blue-800 font-medium mb-2">Debug Information:</h4>
+              <pre className="text-xs text-blue-600 bg-blue-100 p-2 rounded overflow-auto">
+                {debugInfo}
+              </pre>
             </div>
           )}
 
