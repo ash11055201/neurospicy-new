@@ -28,28 +28,26 @@ export default function StorySubmissionForm() {
     setSubmitStatus('idle')
 
     try {
-      // Prepare form data
-      const formDataToSend = {
-        'form-name': 'story-submission',
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        bookFormat: formData.bookFormat,
-        message: formData.message
-      }
+      // Create FormData object (this is the key fix!)
+      const formDataToSend = new FormData()
+      formDataToSend.append('form-name', 'story-submission')
+      formDataToSend.append('firstName', formData.firstName)
+      formDataToSend.append('lastName', formData.lastName)
+      formDataToSend.append('email', formData.email)
+      formDataToSend.append('bookFormat', formData.bookFormat)
+      formDataToSend.append('message', formData.message)
 
       // Debug logging
-      console.log('Submitting form data:', formDataToSend)
+      console.log('Submitting form data:', Object.fromEntries(formDataToSend))
       
       if (debugMode) {
-        setDebugInfo(`Submitting: ${JSON.stringify(formDataToSend, null, 2)}`)
+        setDebugInfo(`Submitting: ${JSON.stringify(Object.fromEntries(formDataToSend), null, 2)}`)
       }
 
-      // Submit to Netlify
+      // Submit to Netlify - DON'T set Content-Type header, let browser handle it
       const response = await fetch('/', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formDataToSend).toString()
+        body: formDataToSend
       })
 
       console.log('Response status:', response.status)
@@ -151,13 +149,25 @@ export default function StorySubmissionForm() {
             <h3 className="text-2xl font-bold text-gray-800">
               No Experience? <span className="text-orange-600">No Problem!</span>
             </h3>
-            <button
-              type="button"
-              onClick={() => setDebugMode(!debugMode)}
-              className="text-xs bg-gray-200 hover:bg-gray-300 text-gray-700 px-2 py-1 rounded"
-            >
-              {debugMode ? 'Hide Debug' : 'Debug Mode'}
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setDebugMode(!debugMode)}
+                className="text-xs bg-gray-200 hover:bg-gray-300 text-gray-700 px-2 py-1 rounded"
+              >
+                {debugMode ? 'Hide Debug' : 'Debug Mode'}
+              </button>
+              {debugMode && (
+                <span className="text-xs text-gray-500">
+                  Debug mode uses AJAX submission
+                </span>
+              )}
+              {!debugMode && (
+                <span className="text-xs text-gray-500">
+                  Using native form submission
+                </span>
+              )}
+            </div>
           </div>
           
           {/* Success Message */}
@@ -214,7 +224,7 @@ export default function StorySubmissionForm() {
             data-netlify="true" 
             data-netlify-honeypot="bot-field"
             action="/story-success"
-            onSubmit={handleSubmit} 
+            onSubmit={debugMode ? handleSubmit : undefined} 
             className="space-y-6"
           >
             {/* Hidden fields for Netlify */}
