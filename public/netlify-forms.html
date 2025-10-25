@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Netlify Forms</title>
+  <title>Netlify Forms Detection</title>
 </head>
 <body>
   <!-- This file is required for Netlify to detect forms -->
@@ -22,6 +22,12 @@
         Don't fill this out if you're human: <input name="bot-field" />
       </label>
     </div>
+  </form>
+  
+  <!-- Additional form for testing -->
+  <form name="test-form" method="POST" data-netlify="true" hidden>
+    <input type="hidden" name="form-name" value="test-form" />
+    <input type="text" name="test-field" />
   </form>
 </body>
 </html>

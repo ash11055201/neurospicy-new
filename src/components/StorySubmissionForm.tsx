@@ -45,7 +45,8 @@ export default function StorySubmissionForm() {
 
       // Debug logging
       console.log('Submitting form data:', formDataToSend)
-      setDebugInfo(`Submitting: ${JSON.stringify(formDataToSend, null, 2)}`)
+      console.log('Encoded data:', encode(formDataToSend))
+      setDebugInfo(`Submitting: ${JSON.stringify(formDataToSend, null, 2)}\nEncoded: ${encode(formDataToSend)}`)
 
       // Submit to Netlify using official method
       const response = await fetch('/', {
