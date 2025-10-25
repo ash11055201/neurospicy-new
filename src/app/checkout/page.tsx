@@ -96,7 +96,7 @@ export default function CheckoutPage() {
               <select
                 value={selectedFormat}
                 onChange={(e) => setSelectedFormat(e.target.value)}
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-black"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500/70 text-black"
               >
                 <option value="ebook">eBook - $29.99</option>
                 <option value="paperback">Paperback - $35.00</option>
@@ -132,14 +132,14 @@ export default function CheckoutPage() {
                     }
                   }}
                   onFocus={(e) => e.target.select()}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-black"
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500/70 text-black"
                 />
               </div>
               <div className="flex-1 sm:flex-none sm:self-end relative">
                 <label className="block text-sm font-medium text-gray-700 mb-2 sm:hidden">Add to Cart</label>
                 <button 
                   onClick={handleAddToCart}
-                  className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer text-sm sm:text-base"
+                  className="w-full bg-gradient-to-r from-orange-500/90 to-red-500/90 hover:from-orange-600/90 hover:to-red-600/90 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer text-sm sm:text-base"
                 >
                   ADD TO CART
                 </button>
@@ -194,8 +194,8 @@ export default function CheckoutPage() {
                 onClick={() => setActiveTab('distribution')}
                 className={`py-3 px-4 sm:py-4 sm:px-6 border-b-2 font-medium text-xs sm:text-sm transition-all duration-200 cursor-pointer hover:bg-gray-50 hover:scale-105 whitespace-nowrap ${
                   activeTab === 'distribution'
-                    ? 'border-orange-500 text-orange-600 bg-orange-50'
-                    : 'border-transparent text-gray-500 hover:text-orange-500 hover:border-orange-300'
+                    ? 'border-orange-500/70 text-orange-600/90 bg-orange-50/50'
+                    : 'border-transparent text-gray-500 hover:text-orange-500/70 hover:border-orange-300/50'
                 }`}
               >
                 Distribution
@@ -204,8 +204,8 @@ export default function CheckoutPage() {
                 onClick={() => setActiveTab('description')}
                 className={`py-3 px-4 sm:py-4 sm:px-6 border-b-2 font-medium text-xs sm:text-sm transition-all duration-200 cursor-pointer hover:bg-gray-50 hover:scale-105 whitespace-nowrap ${
                   activeTab === 'description'
-                    ? 'border-orange-500 text-orange-600 bg-orange-50'
-                    : 'border-transparent text-gray-500 hover:text-orange-500 hover:border-orange-300'
+                    ? 'border-orange-500/70 text-orange-600/90 bg-orange-50/50'
+                    : 'border-transparent text-gray-500 hover:text-orange-500/70 hover:border-orange-300/50'
                 }`}
               >
                 Description
@@ -214,8 +214,8 @@ export default function CheckoutPage() {
                 onClick={() => setActiveTab('additional')}
                 className={`py-3 px-4 sm:py-4 sm:px-6 border-b-2 font-medium text-xs sm:text-sm transition-all duration-200 cursor-pointer hover:bg-gray-50 hover:scale-105 whitespace-nowrap ${
                   activeTab === 'additional'
-                    ? 'border-orange-500 text-orange-600 bg-orange-50'
-                    : 'border-transparent text-gray-500 hover:text-orange-500 hover:border-orange-300'
+                    ? 'border-orange-500/70 text-orange-600/90 bg-orange-50/50'
+                    : 'border-transparent text-gray-500 hover:text-orange-500/70 hover:border-orange-300/50'
                 }`}
               >
                 Additional Info
@@ -224,8 +224,8 @@ export default function CheckoutPage() {
                 onClick={() => setActiveTab('reviews')}
                 className={`py-3 px-4 sm:py-4 sm:px-6 border-b-2 font-medium text-xs sm:text-sm transition-all duration-200 cursor-pointer hover:bg-gray-50 hover:scale-105 whitespace-nowrap ${
                   activeTab === 'reviews'
-                    ? 'border-orange-500 text-orange-600 bg-orange-50'
-                    : 'border-transparent text-gray-500 hover:text-orange-500 hover:border-orange-300'
+                    ? 'border-orange-500/70 text-orange-600/90 bg-orange-50/50'
+                    : 'border-transparent text-gray-500 hover:text-orange-500/70 hover:border-orange-300/50'
                 }`}
               >
                 Reviews (0)

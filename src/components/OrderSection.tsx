@@ -21,7 +21,7 @@ export default function OrderSection() {
         {/* Two Column Layout */}
         <div className="grid lg:grid-cols-2 gap-8 mb-16">
           {/* Left Column - ADHD/Dyslexic Section */}
-          <div className="bg-gradient-to-r from-orange-50 to-red-50 rounded-lg shadow-xl p-8 border-l-4 border-orange-500">
+          <div className="bg-gradient-to-r from-orange-50/80 to-red-50/80 rounded-lg shadow-xl p-8 border-l-4 border-orange-500/70">
             <h3 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-6">
               Given that <span className="text-red-700">ADHD</span> and <span className="text-red-700">Dyslexic</span> individuals
             </h3>
@@ -31,7 +31,7 @@ export default function OrderSection() {
           </div>
 
           {/* Right Column - More About Neurospicy */}
-          <div className="bg-gradient-to-l from-yellow-50 to-orange-50 rounded-lg shadow-xl p-8 border-r-4 border-yellow-600">
+          <div className="bg-gradient-to-l from-yellow-50/80 to-orange-50/80 rounded-lg shadow-xl p-8 border-r-4 border-yellow-600/70">
             <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6">
               More About <span className="text-orange-700">Neurospicy</span>
             </h3>
@@ -48,7 +48,7 @@ export default function OrderSection() {
         <div className="text-center">
           <button 
             onClick={handleGetBookNow}
-            className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white font-bold py-4 px-8 rounded-full text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer"
+            className="bg-gradient-to-r from-orange-500/90 to-red-500/90 hover:from-orange-600/90 hover:to-red-600/90 text-white font-bold py-4 px-8 rounded-full text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer"
           >
             Get The Book Now
           </button>

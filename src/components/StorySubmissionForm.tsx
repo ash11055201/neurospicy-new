@@ -186,7 +186,7 @@ export default function StorySubmissionForm() {
                   required
                   value={formData.firstName}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent shadow-sm text-gray-900 bg-white"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500/70 shadow-sm text-gray-900 bg-white"
                 />
               </div>
               <div>
@@ -200,7 +200,7 @@ export default function StorySubmissionForm() {
                   required
                   value={formData.lastName}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent shadow-sm text-gray-900 bg-white"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500/70 shadow-sm text-gray-900 bg-white"
                 />
               </div>
             </div>
@@ -259,7 +259,7 @@ export default function StorySubmissionForm() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white font-bold py-4 px-8 rounded-full text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 ${
+                className={`bg-gradient-to-r from-orange-500/90 to-red-500/90 hover:from-orange-600/90 hover:to-red-600/90 text-white font-bold py-4 px-8 rounded-full text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 ${
                   isSubmitting ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
                 }`}
               >

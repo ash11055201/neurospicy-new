@@ -25,14 +25,14 @@ export default function HeroSection() {
               <h1 className="text-4xl md:text-6xl font-bold text-gray-800 mb-4">
                 Welcome to
               </h1>
-              <h2 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent mb-4">
+              <h2 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-orange-600/90 to-red-600/90 bg-clip-text text-transparent mb-4">
                 Neurospicy
               </h2>
               <h3 className="text-lg md:text-xl font-semibold text-gray-600 mb-6 italic">
                 A Memoir Of Madness, Magic ADHD and Dyslexia
               </h3>
               <p className="text-xl md:text-2xl text-gray-700 max-w-4xl mx-auto lg:mx-0 leading-relaxed">
-                Dedicated to breaking down the barriers of Dyslexia and ADHD through the inspiring story of, <span className="font-semibold text-orange-600">John O&apos;Shea</span>.
+                Dedicated to breaking down the barriers of Dyslexia and ADHD through the inspiring story of, <span className="font-semibold text-orange-600/90">John O&apos;Shea</span>.
               </p>
             </div>
 
@@ -40,7 +40,7 @@ export default function HeroSection() {
             <div className="mb-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <button 
                 onClick={handleDownloadSample}
-                className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white font-bold py-4 px-8 rounded-full text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer"
+                className="bg-gradient-to-r from-orange-500/90 to-red-500/90 hover:from-orange-600/90 hover:to-red-600/90 text-white font-bold py-4 px-8 rounded-full text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer"
               >
                 Read Sample Now
               </button>
@@ -78,14 +78,14 @@ export default function HeroSection() {
                     priority
                   />
                   {/* Decorative Elements */}
-                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-orange-500 rounded-full animate-pulse"></div>
-                  <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-red-500 rounded-full animate-pulse delay-300"></div>
+                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-orange-500/80 rounded-full animate-pulse"></div>
+                  <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-red-500/80 rounded-full animate-pulse delay-300"></div>
                 </div>
               </div>
               
               {/* Floating Elements */}
               <div className="absolute -top-4 -left-4 w-8 h-8 bg-yellow-400 rounded-full opacity-60 animate-bounce"></div>
-              <div className="absolute -bottom-4 -right-4 w-6 h-6 bg-orange-400 rounded-full opacity-60 animate-bounce delay-500"></div>
+              <div className="absolute -bottom-4 -right-4 w-6 h-6 bg-orange-400/80 rounded-full opacity-60 animate-bounce delay-500"></div>
             </div>
           </div>
         </div>
