@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import GallerySection from './GallerySection'
 
 export default function AboutSection() {
   return (
@@ -90,6 +91,10 @@ export default function AboutSection() {
           </h3>
           <div className="space-y-4 text-gray-700">
             <p className="flex items-start text-base">
+              <span className="text-orange-500 mr-4 mt-1 text-lg">📚</span>
+              <span>I wrote my first book called <span className="font-semibold text-orange-600">"Dyslexia: How Do We Learn"</span> in the 1980s.</span>
+            </p>
+            <p className="flex items-start text-base">
               <span className="text-orange-500 mr-4 mt-1 text-lg">🌏</span>
               <span>I&apos;ve lived with Aboriginals in far north Australia who now call me uncle.</span>
             </p>
@@ -106,6 +111,11 @@ export default function AboutSection() {
               <span>I was a founding council member and chairman of <a href="https://wollangarra.org/" className="text-orange-600 hover:underline" target="_blank" rel="noopener noreferrer">Wollangarra Outdoor Education Centre</a>, an independent, non-profit organization situated beside the Macalister River in Licola. Through outdoor education, Wollangarra provides a vital step towards a healthier environment, stronger community conservation in the nearby mountains, and happier young people. <a href="https://www.facebook.com/Wollangarra/" className="text-orange-600 hover:underline" target="_blank" rel="noopener noreferrer">Learn more on Facebook</a>.</span>
             </p>
           </div>
+        </div>
+
+        {/* Photo Gallery Section */}
+        <div className="mb-8">
+          <GallerySection />
         </div>
 
         {/* Statistics */}
