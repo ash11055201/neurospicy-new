@@ -12,75 +12,56 @@ export default function StorySubmissionForm() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
-  const [debugInfo, setDebugInfo] = useState<string>('')
-
-  const encode = (data: Record<string, string>) => {
-    return Object.keys(data)
-      .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-      .join("&");
-  }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    
-    // Basic validation
-    if (!formData.firstName.trim() || !formData.lastName.trim() || !formData.email.trim() || !formData.bookFormat || !formData.message.trim()) {
-      setSubmitStatus('error')
-      return
+    e.preventDefault();
+  
+    if (
+      !formData.firstName.trim() ||
+      !formData.lastName.trim() ||
+      !formData.email.trim() ||
+      !formData.bookFormat ||
+      !formData.message.trim()
+    ) {
+      setSubmitStatus('error');
+      return;
     }
-
-    setIsSubmitting(true)
-    setSubmitStatus('idle')
-
+  
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+  
+    const encoded = new URLSearchParams({
+      'form-name': 'story-submission',
+      ...formData
+    }).toString();
+  
     try {
-      // Use Netlify's official method: URL-encoded data
-      const formDataToSend = {
-        "form-name": "story-submission",
-        "firstName": formData.firstName,
-        "lastName": formData.lastName,
-        "email": formData.email,
-        "bookFormat": formData.bookFormat,
-        "message": formData.message,
-        "bot-field": "" // Include honeypot field (should be empty)
-      }
-
-      // Debug logging
-      console.log('Submitting form data:', formDataToSend)
-      console.log('Encoded data:', encode(formDataToSend))
-      setDebugInfo(`Submitting: ${JSON.stringify(formDataToSend, null, 2)}\nEncoded: ${encode(formDataToSend)}`)
-
-      // Submit to Netlify using official method
       const response = await fetch('/', {
         method: 'POST',
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: encode(formDataToSend)
-      })
-
-      console.log('Response status:', response.status)
-      console.log('Response headers:', Object.fromEntries(response.headers.entries()))
-      setDebugInfo(prev => prev + `\nResponse: ${response.status} ${response.statusText}`)
-
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encoded
+      });
+  
       if (response.ok) {
-        setSubmitStatus('success')
-        console.log('Form submitted successfully!')
-        setDebugInfo(prev => prev + '\n✅ Form submitted successfully!')
-        // Redirect to success page after a short delay
-        setTimeout(() => {
-          window.location.href = '/story-success'
-        }, 2000)
+        setSubmitStatus('success');
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          bookFormat: '',
+          message: ''
+        });
       } else {
-        const responseText = await response.text()
-        console.error('Form submission failed:', response.status, responseText)
-        setDebugInfo(prev => prev + `\n❌ Error: ${response.status} - ${responseText}`)
-        throw new Error(`Form submission failed: ${response.status}`)
+        setSubmitStatus('error');
       }
     } catch (error) {
-      console.error('Form submission error:', error)
-      setSubmitStatus('error')
+      console.error('Form submission error:', error);
+      setSubmitStatus('error');
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
+  
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -178,41 +159,21 @@ export default function StorySubmissionForm() {
                   <p className="text-red-700 text-sm mt-1">
                     Please make sure all required fields are filled out and try again.
                   </p>
-                  {debugInfo && (
-                    <pre className="text-xs text-red-600 mt-2 bg-red-100 p-2 rounded overflow-auto">
-                      {debugInfo}
-                    </pre>
-                  )}
                 </div>
               </div>
             </div>
           )}
 
-          {/* Debug Info */}
-          {debugInfo && submitStatus !== 'error' && (
-            <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-              <h4 className="text-blue-800 font-medium mb-2">Submission Details:</h4>
-              <pre className="text-xs text-blue-600 bg-blue-100 p-2 rounded overflow-auto">
-                {debugInfo}
-              </pre>
-            </div>
-          )}
-
           <form 
-            name="story-submission" 
-            method="POST" 
-            data-netlify="true" 
-            data-netlify-honeypot="bot-field"
-            onSubmit={handleSubmit} 
+            name="story-submission" // 👈 must have a name
+            method="POST"
+            data-netlify="true" // 👈 tells Netlify to capture submissions
+            data-netlify-honeypot="bot-field" // 👈 optional spam prevention
+            onSubmit={handleSubmit}
             className="space-y-6"
           >
-            {/* Hidden fields for Netlify */}
-            <input type="hidden" name="form-name" value="story-submission" />
-            <div className="hidden">
-              <label>
-                Don&apos;t fill this out if you&apos;re human: <input name="bot-field" type="text" />
-              </label>
-            </div>
+              <input type="hidden" name="form-name" value="story-submission" />
+              <input type="hidden" name="bot-field" />
             <div className="grid md:grid-cols-2 gap-6">
               <div>
                 <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
