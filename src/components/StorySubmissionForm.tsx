@@ -14,6 +14,12 @@ export default function StorySubmissionForm() {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [debugInfo, setDebugInfo] = useState<string>('')
 
+  const encode = (data: Record<string, string>) => {
+    return Object.keys(data)
+      .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+      .join("&");
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     
@@ -27,23 +33,25 @@ export default function StorySubmissionForm() {
     setSubmitStatus('idle')
 
     try {
-      // Create FormData object (this is the key fix!)
-      const formDataToSend = new FormData()
-      formDataToSend.append('form-name', 'story-submission')
-      formDataToSend.append('firstName', formData.firstName)
-      formDataToSend.append('lastName', formData.lastName)
-      formDataToSend.append('email', formData.email)
-      formDataToSend.append('bookFormat', formData.bookFormat)
-      formDataToSend.append('message', formData.message)
+      // Use Netlify's official method: URL-encoded data
+      const formDataToSend = {
+        "form-name": "story-submission",
+        "firstName": formData.firstName,
+        "lastName": formData.lastName,
+        "email": formData.email,
+        "bookFormat": formData.bookFormat,
+        "message": formData.message
+      }
 
       // Debug logging
-      console.log('Submitting form data:', Object.fromEntries(formDataToSend))
-      setDebugInfo(`Submitting: ${JSON.stringify(Object.fromEntries(formDataToSend), null, 2)}`)
+      console.log('Submitting form data:', formDataToSend)
+      setDebugInfo(`Submitting: ${JSON.stringify(formDataToSend, null, 2)}`)
 
-      // Submit to Netlify - DON'T set Content-Type header, let browser handle it
+      // Submit to Netlify using official method
       const response = await fetch('/', {
         method: 'POST',
-        body: formDataToSend
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encode(formDataToSend)
       })
 
       console.log('Response status:', response.status)
