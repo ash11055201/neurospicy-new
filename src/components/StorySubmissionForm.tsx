@@ -40,7 +40,8 @@ export default function StorySubmissionForm() {
         "lastName": formData.lastName,
         "email": formData.email,
         "bookFormat": formData.bookFormat,
-        "message": formData.message
+        "message": formData.message,
+        "bot-field": "" // Include honeypot field (should be empty)
       }
 
       // Debug logging
@@ -207,9 +208,9 @@ export default function StorySubmissionForm() {
           >
             {/* Hidden fields for Netlify */}
             <input type="hidden" name="form-name" value="story-submission" />
-            <div style={{ display: 'none' }}>
+            <div className="hidden">
               <label>
-                Don&apos;t fill this out if you&apos;re human: <input name="bot-field" />
+                Don&apos;t fill this out if you&apos;re human: <input name="bot-field" type="text" />
               </label>
             </div>
             <div className="grid md:grid-cols-2 gap-6">
