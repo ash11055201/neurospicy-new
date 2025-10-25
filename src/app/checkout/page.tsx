@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
+import ReviewSection from '@/components/ReviewSection'
 import { useCart } from '@/contexts/CartContext'
 
 export default function CheckoutPage() {
@@ -321,11 +322,8 @@ export default function CheckoutPage() {
             )}
 
             {activeTab === 'reviews' && (
-              <div className="text-center py-8">
-                <p className="text-gray-500">No reviews yet. Be the first to review this book!</p>
-                <button className="mt-4 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white font-bold py-2 px-6 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer">
-                  Write a Review
-                </button>
+              <div className="py-2">
+                <ReviewSection />
               </div>
             )}
           </div>

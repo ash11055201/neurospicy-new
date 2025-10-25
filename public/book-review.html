@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Review Form</title>
+</head>
+<body>
+    <form name="book-review" netlify netlify-honeypot="bot-field" hidden>
+        <input type="text" name="firstName" />
+        <input type="text" name="lastName" />
+        <input type="email" name="email" />
+        <select name="rating">
+            <option value="5">⭐⭐⭐⭐⭐ Excellent (5 stars)</option>
+            <option value="4">⭐⭐⭐⭐ Very Good (4 stars)</option>
+            <option value="3">⭐⭐⭐ Good (3 stars)</option>
+            <option value="2">⭐⭐ Fair (2 stars)</option>
+            <option value="1">⭐ Poor (1 star)</option>
+        </select>
+        <textarea name="review"></textarea>
+        <input type="hidden" name="form-name" value="book-review" />
+    </form>
+</body>
+</html>
