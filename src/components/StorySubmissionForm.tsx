@@ -12,7 +12,6 @@ export default function StorySubmissionForm() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
-  const [debugMode, setDebugMode] = useState(false)
   const [debugInfo, setDebugInfo] = useState<string>('')
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -39,10 +38,7 @@ export default function StorySubmissionForm() {
 
       // Debug logging
       console.log('Submitting form data:', Object.fromEntries(formDataToSend))
-      
-      if (debugMode) {
-        setDebugInfo(`Submitting: ${JSON.stringify(Object.fromEntries(formDataToSend), null, 2)}`)
-      }
+      setDebugInfo(`Submitting: ${JSON.stringify(Object.fromEntries(formDataToSend), null, 2)}`)
 
       // Submit to Netlify - DON'T set Content-Type header, let browser handle it
       const response = await fetch('/', {
@@ -52,17 +48,12 @@ export default function StorySubmissionForm() {
 
       console.log('Response status:', response.status)
       console.log('Response headers:', Object.fromEntries(response.headers.entries()))
-
-      if (debugMode) {
-        setDebugInfo(prev => prev + `\nResponse: ${response.status} ${response.statusText}`)
-      }
+      setDebugInfo(prev => prev + `\nResponse: ${response.status} ${response.statusText}`)
 
       if (response.ok) {
         setSubmitStatus('success')
         console.log('Form submitted successfully!')
-        if (debugMode) {
-          setDebugInfo(prev => prev + '\n✅ Form submitted successfully!')
-        }
+        setDebugInfo(prev => prev + '\n✅ Form submitted successfully!')
         // Redirect to success page after a short delay
         setTimeout(() => {
           window.location.href = '/story-success'
@@ -70,9 +61,7 @@ export default function StorySubmissionForm() {
       } else {
         const responseText = await response.text()
         console.error('Form submission failed:', response.status, responseText)
-        if (debugMode) {
-          setDebugInfo(prev => prev + `\n❌ Error: ${response.status} - ${responseText}`)
-        }
+        setDebugInfo(prev => prev + `\n❌ Error: ${response.status} - ${responseText}`)
         throw new Error(`Form submission failed: ${response.status}`)
       }
     } catch (error) {
@@ -149,25 +138,6 @@ export default function StorySubmissionForm() {
             <h3 className="text-2xl font-bold text-gray-800">
               No Experience? <span className="text-orange-600">No Problem!</span>
             </h3>
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={() => setDebugMode(!debugMode)}
-                className="text-xs bg-gray-200 hover:bg-gray-300 text-gray-700 px-2 py-1 rounded"
-              >
-                {debugMode ? 'Hide Debug' : 'Debug Mode'}
-              </button>
-              {debugMode && (
-                <span className="text-xs text-gray-500">
-                  Debug mode uses AJAX submission
-                </span>
-              )}
-              {!debugMode && (
-                <span className="text-xs text-gray-500">
-                  Using native form submission
-                </span>
-              )}
-            </div>
           </div>
           
           {/* Success Message */}
@@ -198,7 +168,7 @@ export default function StorySubmissionForm() {
                   <p className="text-red-700 text-sm mt-1">
                     Please make sure all required fields are filled out and try again.
                   </p>
-                  {debugMode && debugInfo && (
+                  {debugInfo && (
                     <pre className="text-xs text-red-600 mt-2 bg-red-100 p-2 rounded overflow-auto">
                       {debugInfo}
                     </pre>
@@ -209,9 +179,9 @@ export default function StorySubmissionForm() {
           )}
 
           {/* Debug Info */}
-          {debugMode && debugInfo && submitStatus !== 'error' && (
+          {debugInfo && submitStatus !== 'error' && (
             <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-              <h4 className="text-blue-800 font-medium mb-2">Debug Information:</h4>
+              <h4 className="text-blue-800 font-medium mb-2">Submission Details:</h4>
               <pre className="text-xs text-blue-600 bg-blue-100 p-2 rounded overflow-auto">
                 {debugInfo}
               </pre>
@@ -223,8 +193,7 @@ export default function StorySubmissionForm() {
             method="POST" 
             data-netlify="true" 
             data-netlify-honeypot="bot-field"
-            action="/story-success"
-            onSubmit={debugMode ? handleSubmit : undefined} 
+            onSubmit={handleSubmit} 
             className="space-y-6"
           >
             {/* Hidden fields for Netlify */}
