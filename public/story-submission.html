@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Story Submission Form</title>
+</head>
+<body>
+    <form name="story-submission" netlify netlify-honeypot="bot-field" hidden>
+        <input type="text" name="firstName" />
+        <input type="text" name="lastName" />
+        <input type="email" name="email" />
+        <select name="bookFormat">
+            <option value="E-Book">E-Book</option>
+            <option value="Hard Book">Hard Book</option>
+            <option value="Audio Book">Audio Book</option>
+        </select>
+        <textarea name="message"></textarea>
+        <input type="hidden" name="form-name" value="story-submission" />
+    </form>
+</body>
+</html>
