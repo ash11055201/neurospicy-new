@@ -29,12 +29,12 @@ export default function CheckoutPage() {
 
   const coverImages = [
     {
-      src: '/neurospicy%20book%20cover.jpg',
+      src: '/neurospicy book cover.jpg',
       alt: 'Neurospicy Book Cover',
       title: 'Book Cover'
     },
     {
-      src: '/neurospicy%20back%20cover.jpg',
+      src: '/neurospicy back cover.jpg',
       alt: 'Neurospicy Back Cover',
       title: 'Back Cover'
     }
