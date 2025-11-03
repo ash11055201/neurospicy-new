@@ -118,9 +118,10 @@ export default function CheckoutPage() {
   const validateForm = () => {
     const hasName = formData.name.trim().length > 0
     const hasEmail = formData.email.trim().length > 0 && formData.email.includes('@')
+    const hasPhone = formData.phone.trim().length > 0
     const hasAddress = !isPhysicalFormat || formData.address.trim().length > 0
     
-    const isValid = hasName && hasEmail && hasAddress
+    const isValid = hasName && hasEmail && hasPhone && hasAddress
     setIsFormValid(isValid)
     return isValid
   }
@@ -187,7 +188,7 @@ export default function CheckoutPage() {
     e.preventDefault()
 
     // Validate required fields
-    if (!formData.name.trim() || !formData.email.trim()) {
+    if (!formData.name.trim() || !formData.email.trim() || !formData.phone.trim()) {
       setSubmitStatus('error')
       return
     }
@@ -345,15 +346,16 @@ export default function CheckoutPage() {
                         />
                       </div>
 
-                      {/* Phone (Optional) */}
+                      {/* Phone (Required) */}
                       <div>
                         <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                          Phone Number
+                          Phone Number *
                         </label>
                         <input
                           type="tel"
                           id="phone"
                           name="phone"
+                          required
                           value={formData.phone}
                           onChange={handleFormChange}
                           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500/70 text-gray-900 bg-white"
@@ -490,15 +492,16 @@ export default function CheckoutPage() {
                     />
                   </div>
 
-                  {/* Phone (Optional) */}
+                  {/* Phone (Required) */}
                   <div>
                     <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                      Phone Number
+                      Phone Number *
                     </label>
                     <input
                       type="tel"
                       id="phone"
                       name="phone"
+                      required
                       value={formData.phone}
                       onChange={handleFormChange}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500/70 text-gray-900 bg-white"
