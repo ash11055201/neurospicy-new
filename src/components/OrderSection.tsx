@@ -9,7 +9,7 @@ export default function OrderSection() {
     router.push('/checkout')
   }
   return (
-    <section id="order" className="py-20 bg-gradient-to-br from-orange-50 via-red-50 to-yellow-50">
+    <section id="order" className="pt-8 pb-20 bg-gradient-to-br from-orange-50 via-red-50 to-yellow-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main CTA Section */}
         <div className="text-center mb-16">

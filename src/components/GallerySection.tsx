@@ -61,16 +61,8 @@ export default function GallerySection() {
   }
 
   return (
-    <section id="gallery" className="py-8 bg-gradient-to-br from-gray-50 to-orange-50/80">
+    <section id="gallery" className="pt-8 pb-4 bg-gradient-to-br from-gray-50 to-orange-50/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-            Photo <span className="bg-gradient-to-r from-orange-600/90 to-red-600/90 bg-clip-text text-transparent">Gallery</span>
-          </h2>
-          <p className="text-lg text-gray-600 mb-6">
-            A visual journey through John's amazing life experiences
-          </p>
-        </div>
 
         {/* Main Carousel */}
         <div className="relative max-w-5xl mx-auto mb-8">

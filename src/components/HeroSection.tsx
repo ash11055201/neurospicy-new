@@ -64,7 +64,7 @@ export default function HeroSection() {
           </div>
 
           {/* Right Column - Book Cover */}
-          <div className="flex justify-center lg:justify-end">
+          <div className="flex flex-col items-center lg:items-end">
             <div className="relative">
               {/* Book Cover with Enhanced Shadow */}
               <div className="bg-white rounded-2xl shadow-2xl p-6 transform hover:scale-105 transition-transform duration-500 hover:shadow-3xl">
@@ -87,6 +87,10 @@ export default function HeroSection() {
               <div className="absolute -top-4 -left-4 w-8 h-8 bg-yellow-400 rounded-full opacity-60 animate-bounce"></div>
               <div className="absolute -bottom-4 -right-4 w-6 h-6 bg-orange-400/80 rounded-full opacity-60 animate-bounce delay-500"></div>
             </div>
+            {/* Artist Attribution */}
+            <p className="text-center text-gray-600 text-sm mt-4 italic">
+              Painted by Finn O&apos;Shea
+            </p>
           </div>
         </div>
       </div>

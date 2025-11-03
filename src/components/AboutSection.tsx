@@ -92,7 +92,7 @@ export default function AboutSection() {
           <div className="space-y-4 text-gray-700">
             <p className="flex items-start text-base">
               <span className="text-orange-500 mr-4 mt-1 text-lg">📚</span>
-              <span>I wrote my first book called <span className="font-semibold text-orange-600">"Dyslexia: How Do We Learn"</span> in the 1980s.</span>
+              <span>I wrote my first book called <span className="font-semibold text-orange-600">&ldquo;Dyslexia: How Do We Learn&rdquo;</span> in the 1980s.</span>
             </p>
             <p className="flex items-start text-base">
               <span className="text-orange-500 mr-4 mt-1 text-lg">🌏</span>
@@ -113,13 +113,8 @@ export default function AboutSection() {
           </div>
         </div>
 
-        {/* Photo Gallery Section */}
-        <div className="mb-8">
-          <GallerySection />
-        </div>
-
         {/* Statistics */}
-        <div className="bg-gradient-to-r from-orange-600 via-red-600 to-pink-600 rounded-lg p-8 text-white text-center shadow-2xl">
+        <div className="bg-gradient-to-r from-orange-600 via-red-600 to-pink-600 rounded-lg p-8 text-white text-center shadow-2xl mb-16">
           <h3 className="text-2xl font-bold mb-6">The Power of Neurodivergent Minds</h3>
           
           {/* NASA Image Section */}
@@ -158,6 +153,11 @@ export default function AboutSection() {
           <p className="mt-6 text-lg">
             Why does NASA employ dyslexic people? Their strengths translate into real-world success. They&apos;re deliberately recruited for their exceptional abilities in areas like 3D perception and creative problem-solving, skills so essential for space exploration.
           </p>
+        </div>
+
+        {/* Photo Gallery Section */}
+        <div className="mb-0">
+          <GallerySection />
         </div>
       </div>
     </section>

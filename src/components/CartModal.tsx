@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from 'react'
 import { useCart } from '@/contexts/CartContext'
 import { useRouter } from 'next/navigation'
 
@@ -11,6 +12,8 @@ interface CartModalProps {
 export default function CartModal({ isOpen, onClose }: CartModalProps) {
   const { items, removeFromCart, updateQuantity, getTotalPrice, clearCart } = useCart()
   const router = useRouter()
+  const [discountCode, setDiscountCode] = useState('')
+  const [isDiscountApplied, setIsDiscountApplied] = useState(false)
 
   if (!isOpen) return null
 
@@ -24,6 +27,25 @@ export default function CartModal({ isOpen, onClose }: CartModalProps) {
 
   const formatPrice = (price: number) => {
     return `$${price.toFixed(2)}`
+  }
+
+  // Calculate price with discount
+  const getDiscountedPrice = () => {
+    const baseTotal = getTotalPrice()
+    if (isDiscountApplied && discountCode === 'ABC25') {
+      return baseTotal * 0.85 // 15% off
+    }
+    return baseTotal
+  }
+
+  const handleDiscountCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const code = e.target.value.toUpperCase()
+    setDiscountCode(code)
+    if (code === 'ABC25') {
+      setIsDiscountApplied(true)
+    } else {
+      setIsDiscountApplied(false)
+    }
   }
 
   return (
@@ -107,9 +129,45 @@ export default function CartModal({ isOpen, onClose }: CartModalProps) {
         {/* Footer */}
         {items.length > 0 && (
           <div className="border-t border-gray-200 p-4 sm:p-6">
-            <div className="flex justify-between items-center mb-4">
-              <span className="text-base sm:text-lg font-semibold text-gray-800">Total:</span>
-              <span className="text-xl sm:text-2xl font-bold text-orange-600">{formatPrice(getTotalPrice())}</span>
+            {/* Discount Code and Total on same line */}
+            <div className="flex flex-col sm:flex-row gap-4 mb-4">
+              {/* Discount Code Section */}
+              <div className="flex-1">
+                <label className="block text-sm font-medium text-gray-700 mb-2">Discount Code</label>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={discountCode}
+                    onChange={handleDiscountCodeChange}
+                    placeholder="Enter discount code"
+                    className="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500/70 text-black uppercase text-sm sm:text-base"
+                  />
+                  {isDiscountApplied && (
+                    <div className="flex items-center text-green-600 font-semibold px-3">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                  )}
+                </div>
+                {discountCode && !isDiscountApplied && (
+                  <p className="text-red-500 text-sm mt-1">Invalid discount code</p>
+                )}
+              </div>
+
+              {/* Total Price */}
+              <div className="flex-1 sm:flex-none sm:items-end sm:justify-end flex flex-col">
+                {isDiscountApplied && (
+                  <div className="flex items-center gap-2 mb-2 sm:justify-end">
+                    <span className="text-base text-gray-500 line-through">{formatPrice(getTotalPrice())}</span>
+                    <span className="bg-green-100 text-green-800 text-xs sm:text-sm font-semibold px-2 py-1 rounded">15% OFF</span>
+                  </div>
+                )}
+                <div className="flex justify-between sm:justify-end items-center gap-2 sm:gap-4">
+                  <span className="text-base sm:text-lg font-semibold text-gray-800">Total:</span>
+                  <span className="text-xl sm:text-2xl font-bold text-orange-600">{formatPrice(getDiscountedPrice())}</span>
+                </div>
+              </div>
             </div>
             
             <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
