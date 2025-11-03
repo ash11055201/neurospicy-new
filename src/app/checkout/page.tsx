@@ -27,7 +27,8 @@ export default function CheckoutPage() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
-  const [paymentMethod, setPaymentMethod] = useState<'stripe' | 'netlify-form' | null>(null)
+  const [paymentMethod, setPaymentMethod] = useState<'stripe' | null>(null)
+  const [isFormValid, setIsFormValid] = useState(false)
   const { addToCart } = useCart()
   const router = useRouter()
 
@@ -92,6 +93,8 @@ export default function CheckoutPage() {
     })
     setPaymentMethod('stripe')
     setShowCheckoutForm(true)
+    // Reset form validation when opening
+    setIsFormValid(false)
   }
 
   const handleAddToCart = () => {
@@ -111,16 +114,15 @@ export default function CheckoutPage() {
     }, 1000)
   }
 
-  const handleNetlifyForm = () => {
-    addToCart({
-      title: 'Neurospicy',
-      format: selectedFormat,
-      price: getPrice(),
-      quantity: quantity,
-      sku: selectedFormat === 'ebook' ? '3001' : selectedFormat === 'paperback' ? '1001' : '2001'
-    })
-    setPaymentMethod('netlify-form')
-    setShowCheckoutForm(true)
+  // Validate form whenever form data changes
+  const validateForm = () => {
+    const hasName = formData.name.trim().length > 0
+    const hasEmail = formData.email.trim().length > 0 && formData.email.includes('@')
+    const hasAddress = !isPhysicalFormat || formData.address.trim().length > 0
+    
+    const isValid = hasName && hasEmail && hasAddress
+    setIsFormValid(isValid)
+    return isValid
   }
 
   const handlePaymentSuccess = () => {
@@ -144,6 +146,8 @@ export default function CheckoutPage() {
       ...formData,
       [e.target.name]: e.target.value
     })
+    // Validate after a short delay to avoid excessive validation
+    setTimeout(() => validateForm(), 100)
   }
 
   const handleFormSubmit = async (e: React.FormEvent) => {
@@ -224,6 +228,7 @@ export default function CheckoutPage() {
                       setShowCheckoutForm(false)
                       setSubmitStatus('idle')
                       setPaymentMethod(null)
+                      setIsFormValid(false)
                     }}
                     className="text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full p-1 transition-all duration-200 cursor-pointer"
                     aria-label="Close modal"
@@ -262,43 +267,153 @@ export default function CheckoutPage() {
                   </div>
                 )}
 
-                {/* Stripe Checkout */}
-                {paymentMethod === 'stripe' ? (
-                  <div>
-                    <div className="mb-4">
-                      <h3 className="text-lg font-semibold text-gray-800 mb-2">Order Summary</h3>
-                      <div className="bg-gray-50 rounded-lg p-4 space-y-2">
-                        <div className="flex justify-between">
-                          <span className="text-gray-600">Format:</span>
-                          <span className="font-medium text-gray-800 capitalize">{selectedFormat}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-gray-600">Quantity:</span>
-                          <span className="font-medium text-gray-800">{quantity}</span>
-                        </div>
-                        {isDiscountApplied && (
-                          <div className="flex justify-between">
-                            <span className="text-gray-600">Discount:</span>
-                            <span className="font-medium text-green-600">15% OFF</span>
-                          </div>
-                        )}
-                        <div className="flex justify-between pt-2 border-t border-gray-200">
-                          <span className="text-lg font-semibold text-gray-800">Total:</span>
-                          <span className="text-lg font-bold text-orange-600">${(getPrice() * quantity).toFixed(2)}</span>
-                        </div>
+                {/* Form must be filled first when Stripe payment is selected */}
+                {paymentMethod === 'stripe' && (
+                  <>
+                    <form
+                      name="checkout"
+                      method="POST"
+                      data-netlify="true"
+                      data-netlify-honeypot="bot-field"
+                      className="space-y-4"
+                    >
+                      <input type="hidden" name="form-name" value="checkout" />
+                      <input type="hidden" name="bot-field" />
+
+                      {/* Name */}
+                      <div>
+                        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                          Name *
+                        </label>
+                        <input
+                          type="text"
+                          id="name"
+                          name="name"
+                          required
+                          value={formData.name}
+                          onChange={handleFormChange}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500/70 text-gray-900 bg-white"
+                        />
                       </div>
-                    </div>
-                    <StripeCheckout
-                      amount={getPrice() * quantity}
-                      format={selectedFormat}
-                      quantity={quantity}
-                      discountCode={discountCode}
-                      customerEmail={formData.email}
-                      onSuccess={handlePaymentSuccess}
-                      onError={handlePaymentError}
-                    />
-                  </div>
-                ) : (
+
+                      {/* Email */}
+                      <div>
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                          Email *
+                        </label>
+                        <input
+                          type="email"
+                          id="email"
+                          name="email"
+                          required
+                          value={formData.email}
+                          onChange={handleFormChange}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500/70 text-gray-900 bg-white"
+                        />
+                      </div>
+
+                      {/* Phone (Optional) */}
+                      <div>
+                        <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                          Phone Number
+                        </label>
+                        <input
+                          type="tel"
+                          id="phone"
+                          name="phone"
+                          value={formData.phone}
+                          onChange={handleFormChange}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500/70 text-gray-900 bg-white"
+                        />
+                      </div>
+
+                      {/* Address (Only for Paperback/Hardcover) */}
+                      {isPhysicalFormat && (
+                        <div>
+                          <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-2">
+                            Address *
+                          </label>
+                          <textarea
+                            id="address"
+                            name="address"
+                            required
+                            rows={3}
+                            value={formData.address}
+                            onChange={(e) => {
+                              setFormData({ ...formData, address: e.target.value })
+                              setTimeout(() => validateForm(), 100)
+                            }}
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500/70 text-gray-900 bg-white"
+                            placeholder="Enter your shipping address"
+                          />
+                        </div>
+                      )}
+
+                      {/* Continue to Payment Button */}
+                      {!isFormValid && (
+                        <div className="pt-4">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              if (validateForm()) {
+                                setIsFormValid(true)
+                              } else {
+                                setSubmitStatus('error')
+                              }
+                            }}
+                            className="w-full bg-gradient-to-r from-orange-500/90 to-red-500/90 hover:from-orange-600/90 hover:to-red-600/90 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
+                          >
+                            Continue to Payment
+                          </button>
+                          <p className="text-sm text-gray-500 mt-2 text-center">
+                            Please fill in all required fields to continue
+                          </p>
+                        </div>
+                      )}
+                    </form>
+
+                    {/* Show Stripe Payment only after form is validated */}
+                    {isFormValid && (
+                      <div className="mt-6 pt-6 border-t border-gray-200">
+                        <div className="mb-4">
+                          <h3 className="text-lg font-semibold text-gray-800 mb-2">Order Summary</h3>
+                          <div className="bg-gray-50 rounded-lg p-4 space-y-2">
+                            <div className="flex justify-between">
+                              <span className="text-gray-600">Format:</span>
+                              <span className="font-medium text-gray-800 capitalize">{selectedFormat}</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-gray-600">Quantity:</span>
+                              <span className="font-medium text-gray-800">{quantity}</span>
+                            </div>
+                            {isDiscountApplied && (
+                              <div className="flex justify-between">
+                                <span className="text-gray-600">Discount:</span>
+                                <span className="font-medium text-green-600">15% OFF</span>
+                              </div>
+                            )}
+                            <div className="flex justify-between pt-2 border-t border-gray-200">
+                              <span className="text-lg font-semibold text-gray-800">Total:</span>
+                              <span className="text-lg font-bold text-orange-600">${(getPrice() * quantity).toFixed(2)}</span>
+                            </div>
+                          </div>
+                        </div>
+                        <StripeCheckout
+                          amount={getPrice() * quantity}
+                          format={selectedFormat}
+                          quantity={quantity}
+                          discountCode={discountCode}
+                          customerEmail={formData.email}
+                          onSuccess={handlePaymentSuccess}
+                          onError={handlePaymentError}
+                        />
+                      </div>
+                    )}
+                  </>
+                )}
+                
+                {/* Fallback form (should not be shown, but keeping for safety) */}
+                {!paymentMethod && (
                   <form
                   name="checkout"
                   method="POST"
@@ -592,13 +707,6 @@ export default function CheckoutPage() {
                   <path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l-2.541 4.666c-.49-.245-1.196-.566-1.91-.866l1.087-2.604c-.363-.134-.758-.263-1.071-.363zm-1.432 5.762c-2.341.735-4.005 1.705-4.005 2.935 0 .988.834 1.692 2.11 1.692 2.877 0 5.298-1.402 6.965-2.343l-2.54-4.62c-.57.205-1.2.414-1.824.616l1.294 2.92zm-11.544-4.812c0 2.084 1.507 3.874 3.554 4.724l2.862-6.848c-1.314-1.032-2.158-2.293-2.158-3.94 0-2.98 2.476-5.146 6.003-5.146.281 0 .553.019.813.052v6.22h-3.495c-1.372 0-2.077.701-2.077 1.8 0 1.459 1.161 2.117 2.867 2.898l4.162-9.848c.579-.226 1.19-.413 1.822-.568-.747-.28-1.558-.43-2.411-.43-5.048 0-8.728 3.108-8.728 7.358z"/>
                 </svg>
                 <span>Pay with Stripe</span>
-              </button>
-              
-              <button
-                onClick={handleNetlifyForm}
-                className="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 sm:py-4 px-4 sm:px-6 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 text-sm sm:text-base"
-              >
-                <span className="text-blue-600 font-bold">Alternative Payment</span>
               </button>
             </div>
 
