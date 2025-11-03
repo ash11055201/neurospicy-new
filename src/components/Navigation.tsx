@@ -74,7 +74,7 @@ export default function Navigation() {
                 Contact
               </button>
               <button 
-                onClick={() => window.location.href = '/checkout'}
+                onClick={() => router.push('/checkout')}
                 className="bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white font-bold py-2 px-4 rounded-lg text-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer"
               >
                 Buy Book
@@ -127,7 +127,7 @@ export default function Navigation() {
                 Contact
               </button>
               <button 
-                onClick={() => window.location.href = '/checkout'}
+                onClick={() => router.push('/checkout')}
                 className="bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white font-bold py-3 px-4 rounded-lg text-base shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer w-full text-center mt-2"
               >
                 Buy Book

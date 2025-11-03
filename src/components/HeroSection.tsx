@@ -2,8 +2,10 @@
 "use client"
 
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
 export default function HeroSection() {
+  const router = useRouter()
   const handleDownloadSample = () => {
     // Create a link element to trigger download
     const link = document.createElement('a');
@@ -45,7 +47,7 @@ export default function HeroSection() {
                 Read Sample Now
               </button>
               <button 
-                onClick={() => window.location.href = '/checkout'}
+                onClick={() => router.push('/checkout')}
                 className="bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white font-bold py-4 px-8 rounded-full text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer"
               >
                 Get the Book Now
