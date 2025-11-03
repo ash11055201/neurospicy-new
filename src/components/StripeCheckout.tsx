@@ -54,7 +54,7 @@ function CheckoutForm({
       const { error, paymentIntent } = await stripe.confirmPayment({
         elements,
         confirmParams: {
-          return_url: `${window.location.origin}/story-success`,
+          return_url: `${window.location.origin}/payment-success`,
           receipt_email: customerEmail || undefined,
         },
         redirect: 'if_required',

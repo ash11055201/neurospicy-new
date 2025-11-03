@@ -161,7 +161,7 @@ export default function CheckoutPage() {
 
     setSubmitStatus('success')
     setTimeout(() => {
-      router.push('/story-success')
+      router.push('/payment-success')
       setShowCheckoutForm(false)
       setSubmitStatus('idle')
     }, 2000)
