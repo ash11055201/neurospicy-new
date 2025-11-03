@@ -125,7 +125,40 @@ export default function CheckoutPage() {
     return isValid
   }
 
-  const handlePaymentSuccess = () => {
+  const handlePaymentSuccess = async () => {
+    // Submit form data to Netlify Forms
+    const formSubmissionData = {
+      'form-name': 'checkout',
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone || '',
+      address: isPhysicalFormat ? formData.address : '',
+      format: selectedFormat,
+      quantity: quantity.toString(),
+      price: getPrice().toFixed(2),
+      discountCode: discountCode || '',
+      paymentMethod: 'stripe',
+      paymentStatus: 'completed',
+    }
+
+    const encoded = new URLSearchParams(formSubmissionData).toString()
+
+    try {
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encoded,
+      })
+
+      if (response.ok) {
+        console.log('Form data submitted to Netlify Forms')
+      } else {
+        console.error('Failed to submit form to Netlify Forms')
+      }
+    } catch (error) {
+      console.error('Error submitting form to Netlify Forms:', error)
+    }
+
     setSubmitStatus('success')
     setTimeout(() => {
       router.push('/story-success')
