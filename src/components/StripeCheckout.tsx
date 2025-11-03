@@ -26,13 +26,15 @@ interface StripeCheckoutProps {
 
 function CheckoutForm({
   amount,
-  format,
-  quantity,
-  discountCode,
   customerEmail,
   onSuccess,
   onError,
-}: StripeCheckoutProps) {
+}: {
+  amount: number
+  customerEmail?: string
+  onSuccess?: () => void
+  onError?: (error: string) => void
+}) {
   const stripe = useStripe()
   const elements = useElements()
   const [isProcessing, setIsProcessing] = useState(false)
@@ -67,9 +69,10 @@ function CheckoutForm({
       } else {
         setIsProcessing(false)
       }
-    } catch (error: any) {
-      setErrorMessage(error.message || 'An error occurred')
-      onError?.(error.message || 'An error occurred')
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'An error occurred'
+      setErrorMessage(errorMessage)
+      onError?.(errorMessage)
       setIsProcessing(false)
     }
   }
@@ -125,7 +128,15 @@ function CheckoutForm({
   )
 }
 
-export default function StripeCheckout(props: StripeCheckoutProps) {
+export default function StripeCheckout({
+  amount,
+  format,
+  quantity,
+  discountCode,
+  customerEmail,
+  onSuccess,
+  onError,
+}: StripeCheckoutProps) {
   const [clientSecret, setClientSecret] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(true)
 
@@ -139,13 +150,13 @@ export default function StripeCheckout(props: StripeCheckoutProps) {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            amount: props.amount,
+            amount,
             currency: 'usd',
             metadata: {
-              format: props.format,
-              quantity: props.quantity.toString(),
-              discountCode: props.discountCode || '',
-              customerEmail: props.customerEmail || '',
+              format,
+              quantity: quantity.toString(),
+              discountCode: discountCode || '',
+              customerEmail: customerEmail || '',
             },
           }),
         })
@@ -157,16 +168,17 @@ export default function StripeCheckout(props: StripeCheckoutProps) {
         }
 
         setClientSecret(data.clientSecret)
-      } catch (error: any) {
+      } catch (error) {
         console.error('Error creating payment intent:', error)
-        props.onError?.(error.message)
+        const errorMessage = error instanceof Error ? error.message : 'Failed to create payment intent'
+        onError?.(errorMessage)
       } finally {
         setIsLoading(false)
       }
     }
 
     createPaymentIntent()
-  }, [props.amount, props.format, props.quantity, props.discountCode, props.customerEmail, props.onError])
+  }, [amount, format, quantity, discountCode, customerEmail, onError])
 
   if (!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY) {
     return (
@@ -204,7 +216,12 @@ export default function StripeCheckout(props: StripeCheckoutProps) {
 
   return (
     <Elements stripe={stripePromise} options={options}>
-      <CheckoutForm {...props} />
+      <CheckoutForm
+        amount={amount}
+        customerEmail={customerEmail}
+        onSuccess={onSuccess}
+        onError={onError}
+      />
     </Elements>
   )
 }

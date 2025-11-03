@@ -2,7 +2,7 @@ import { Handler } from '@netlify/functions'
 import Stripe from 'stripe'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2024-12-18.acacia',
+  apiVersion: '2025-10-29.clover',
 })
 
 interface RequestBody {
@@ -16,13 +16,13 @@ interface RequestBody {
   }
 }
 
+type ResponseHeaders = Record<string, string>
+
 export const handler: Handler = async (event) => {
-  // Only allow POST requests
-  if (event.httpMethod !== 'POST') {
-    return {
-      statusCode: 405,
-      body: JSON.stringify({ error: 'Method not allowed' }),
-    }
+  const corsHeaders: ResponseHeaders = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
   }
 
   // Handle CORS preflight
@@ -30,11 +30,22 @@ export const handler: Handler = async (event) => {
     return {
       statusCode: 200,
       headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Allow-Methods': 'POST, OPTIONS',
+        ...corsHeaders,
+        'Content-Type': 'text/plain',
       },
       body: '',
+    }
+  }
+
+  // Only allow POST requests
+  if (event.httpMethod !== 'POST') {
+    return {
+      statusCode: 405,
+      headers: {
+        ...corsHeaders,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ error: 'Method not allowed' }),
     }
   }
 
@@ -46,7 +57,8 @@ export const handler: Handler = async (event) => {
       return {
         statusCode: 400,
         headers: {
-          'Access-Control-Allow-Origin': '*',
+          ...corsHeaders,
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ error: 'Invalid amount' }),
       }
@@ -68,7 +80,7 @@ export const handler: Handler = async (event) => {
     return {
       statusCode: 200,
       headers: {
-        'Access-Control-Allow-Origin': '*',
+        ...corsHeaders,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -76,15 +88,17 @@ export const handler: Handler = async (event) => {
         paymentIntentId: paymentIntent.id,
       }),
     }
-  } catch (error: any) {
+  } catch (error) {
     console.error('Error creating payment intent:', error)
+    const errorMessage = error instanceof Error ? error.message : 'Failed to create payment intent'
     return {
       statusCode: 500,
       headers: {
-        'Access-Control-Allow-Origin': '*',
+        ...corsHeaders,
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        error: error.message || 'Failed to create payment intent',
+        error: errorMessage,
       }),
     }
   }

@@ -2,7 +2,7 @@ import { Handler } from '@netlify/functions'
 import Stripe from 'stripe'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2024-12-18.acacia',
+  apiVersion: '2025-10-29.clover',
 })
 
 // Webhook secret from Stripe dashboard
@@ -27,11 +27,12 @@ export const handler: Handler = async (event) => {
       sig,
       webhookSecret
     )
-  } catch (err: any) {
-    console.error('Webhook signature verification failed:', err.message)
+  } catch (err) {
+    const errorMessage = err instanceof Error ? err.message : 'Webhook signature verification failed'
+    console.error('Webhook signature verification failed:', errorMessage)
     return {
       statusCode: 400,
-      body: JSON.stringify({ error: `Webhook Error: ${err.message}` }),
+      body: JSON.stringify({ error: `Webhook Error: ${errorMessage}` }),
     }
   }
 
@@ -70,11 +71,12 @@ export const handler: Handler = async (event) => {
       statusCode: 200,
       body: JSON.stringify({ received: true }),
     }
-  } catch (error: any) {
+  } catch (error) {
     console.error('Error processing webhook:', error)
+    const errorMessage = error instanceof Error ? error.message : 'Error processing webhook'
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: error.message }),
+      body: JSON.stringify({ error: errorMessage }),
     }
   }
 }
