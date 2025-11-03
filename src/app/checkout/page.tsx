@@ -6,6 +6,8 @@ import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 import ReviewSection from '@/components/ReviewSection'
 import { useCart } from '@/contexts/CartContext'
+import StripeCheckout from '@/components/StripeCheckout'
+import { useRouter } from 'next/navigation'
 
 export default function CheckoutPage() {
   const [selectedFormat, setSelectedFormat] = useState('ebook')
@@ -25,7 +27,9 @@ export default function CheckoutPage() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [paymentMethod, setPaymentMethod] = useState<'stripe' | 'netlify-form' | null>(null)
   const { addToCart } = useCart()
+  const router = useRouter()
 
   const coverImages = [
     {
@@ -78,7 +82,7 @@ export default function CheckoutPage() {
   }
 
 
-  const handleGooglePay = () => {
+  const handleStripeCheckout = () => {
     addToCart({
       title: 'Neurospicy',
       format: selectedFormat,
@@ -86,6 +90,7 @@ export default function CheckoutPage() {
       quantity: quantity,
       sku: selectedFormat === 'ebook' ? '3001' : selectedFormat === 'paperback' ? '1001' : '2001'
     })
+    setPaymentMethod('stripe')
     setShowCheckoutForm(true)
   }
 
@@ -106,7 +111,7 @@ export default function CheckoutPage() {
     }, 1000)
   }
 
-  const handlePayPal = () => {
+  const handleNetlifyForm = () => {
     addToCart({
       title: 'Neurospicy',
       format: selectedFormat,
@@ -114,7 +119,22 @@ export default function CheckoutPage() {
       quantity: quantity,
       sku: selectedFormat === 'ebook' ? '3001' : selectedFormat === 'paperback' ? '1001' : '2001'
     })
+    setPaymentMethod('netlify-form')
     setShowCheckoutForm(true)
+  }
+
+  const handlePaymentSuccess = () => {
+    setSubmitStatus('success')
+    setTimeout(() => {
+      router.push('/story-success')
+      setShowCheckoutForm(false)
+      setSubmitStatus('idle')
+    }, 2000)
+  }
+
+  const handlePaymentError = (error: string) => {
+    setSubmitStatus('error')
+    console.error('Payment error:', error)
   }
 
   const isPhysicalFormat = selectedFormat === 'paperback' || selectedFormat === 'hardcover'
@@ -203,6 +223,7 @@ export default function CheckoutPage() {
                     onClick={() => {
                       setShowCheckoutForm(false)
                       setSubmitStatus('idle')
+                      setPaymentMethod(null)
                     }}
                     className="text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full p-1 transition-all duration-200 cursor-pointer"
                     aria-label="Close modal"
@@ -241,7 +262,44 @@ export default function CheckoutPage() {
                   </div>
                 )}
 
-                <form
+                {/* Stripe Checkout */}
+                {paymentMethod === 'stripe' ? (
+                  <div>
+                    <div className="mb-4">
+                      <h3 className="text-lg font-semibold text-gray-800 mb-2">Order Summary</h3>
+                      <div className="bg-gray-50 rounded-lg p-4 space-y-2">
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Format:</span>
+                          <span className="font-medium text-gray-800 capitalize">{selectedFormat}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Quantity:</span>
+                          <span className="font-medium text-gray-800">{quantity}</span>
+                        </div>
+                        {isDiscountApplied && (
+                          <div className="flex justify-between">
+                            <span className="text-gray-600">Discount:</span>
+                            <span className="font-medium text-green-600">15% OFF</span>
+                          </div>
+                        )}
+                        <div className="flex justify-between pt-2 border-t border-gray-200">
+                          <span className="text-lg font-semibold text-gray-800">Total:</span>
+                          <span className="text-lg font-bold text-orange-600">${(getPrice() * quantity).toFixed(2)}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <StripeCheckout
+                      amount={getPrice() * quantity}
+                      format={selectedFormat}
+                      quantity={quantity}
+                      discountCode={discountCode}
+                      customerEmail={formData.email}
+                      onSuccess={handlePaymentSuccess}
+                      onError={handlePaymentError}
+                    />
+                  </div>
+                ) : (
+                  <form
                   name="checkout"
                   method="POST"
                   data-netlify="true"
@@ -340,6 +398,7 @@ export default function CheckoutPage() {
                     </button>
                   </div>
                 </form>
+                )}
               </div>
             </div>
           </div>
@@ -526,18 +585,20 @@ export default function CheckoutPage() {
             {/* Payment Options */}
             <div className="space-y-3 sm:space-y-4">
               <button
-                onClick={handleGooglePay}
-                className="w-full bg-black hover:bg-gray-800 text-white font-bold py-3 sm:py-4 px-4 sm:px-6 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 text-sm sm:text-base"
+                onClick={handleStripeCheckout}
+                className="w-full bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white font-bold py-3 sm:py-4 px-4 sm:px-6 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 text-sm sm:text-base"
               >
-                <span className="text-white font-bold">G</span>
-                <span>Pay</span>
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l-2.541 4.666c-.49-.245-1.196-.566-1.91-.866l1.087-2.604c-.363-.134-.758-.263-1.071-.363zm-1.432 5.762c-2.341.735-4.005 1.705-4.005 2.935 0 .988.834 1.692 2.11 1.692 2.877 0 5.298-1.402 6.965-2.343l-2.54-4.62c-.57.205-1.2.414-1.824.616l1.294 2.92zm-11.544-4.812c0 2.084 1.507 3.874 3.554 4.724l2.862-6.848c-1.314-1.032-2.158-2.293-2.158-3.94 0-2.98 2.476-5.146 6.003-5.146.281 0 .553.019.813.052v6.22h-3.495c-1.372 0-2.077.701-2.077 1.8 0 1.459 1.161 2.117 2.867 2.898l4.162-9.848c.579-.226 1.19-.413 1.822-.568-.747-.28-1.558-.43-2.411-.43-5.048 0-8.728 3.108-8.728 7.358z"/>
+                </svg>
+                <span>Pay with Stripe</span>
               </button>
               
               <button
-                onClick={handlePayPal}
+                onClick={handleNetlifyForm}
                 className="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 sm:py-4 px-4 sm:px-6 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 text-sm sm:text-base"
               >
-                <span className="text-blue-600 font-bold">PayPal</span>
+                <span className="text-blue-600 font-bold">Alternative Payment</span>
               </button>
             </div>
 
