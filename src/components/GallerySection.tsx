@@ -10,37 +10,37 @@ export default function GallerySection() {
     {
       src: '/IMG_0391.jpeg',
       alt: 'First Book',
-      title: 'Dyslexia: How Do We Learn'
+      title: 'First Book: Dyslexia: How Do We Learn'
     },
     {
       src: '/IMG_5962.jpeg',
-      alt: 'Aboriginal community experience',
-      title: 'Aboriginal Community'
+      alt: 'Dinny McDinny my aboriginal father and me',
+      title: 'Dinny McDinny my aboriginal father and me'
     },
     {
       src: '/IMG_6496.jpeg',
-      alt: 'Aboriginal community experience',
-      title: 'Aboriginal Community'
+      alt: 'Dugong killed in The Gulf of Carpentaria facing out to sea so its sprites returned to other animals',
+      title: 'Dugong killed in The Gulf of Carpentaria facing out to sea so its sprites returned to other animals'
     },
     {
       src: '/IMG_6504.jpeg',
-      alt: 'Aboriginal community experience',
-      title: 'Aboriginal Community'
+      alt: 'Dinny McDinny Making Spear, Aboriginal Elder Yanyuwa people',
+      title: 'Dinny McDinny Making Spear, Aboriginal Elder Yanyuwa people'
     },
     {
       src: '/IMG_6506.jpeg',
-      alt: 'Aboriginal community experience',
-      title: 'Aboriginal Community'
+      alt: "Me Making a Spear, Police Lagon McArthur River 80's",
+      title: "Me Making a Spear, Police Lagon McArthur River 80's"
     },
     {
       src: '/IMG_6713.jpeg',
-      alt: 'Aboriginal community experience',
-      title: 'Aboriginal Community'
+      alt: 'Family and friends visiting McArthur River from near Borroloola 2023',
+      title: 'Family and friends visiting McArthur River from near Borroloola 2023'
     },
     {
       src: '/IMG_6903.jpeg',
-      alt: 'Aboriginal community experience',
-      title: 'Aboriginal Community'
+      alt: 'Nancy McDinny Grand Doughty Dinny McDinny and me in King Island',
+      title: 'Nancy McDinny Grand Doughty Dinny McDinny and me in King Island'
     }
   ]
 
@@ -83,8 +83,7 @@ export default function GallerySection() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded-lg"></div>
                     <div className="absolute bottom-4 left-4 right-4 text-white">
-                      <h3 className="text-2xl font-bold mb-2">{image.title}</h3>
-                      <p className="text-lg opacity-90">{image.alt}</p>
+                      <h3 className="text-2xl font-bold">{image.title}</h3>
                     </div>
                   </div>
                 </div>
