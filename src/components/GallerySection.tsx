@@ -41,6 +41,21 @@ export default function GallerySection() {
       src: '/IMG_6903.jpeg',
       alt: 'Nancy McDinny Grand Doughty Dinny McDinny and me in King Island',
       title: 'Nancy McDinny Grand Doughty Dinny McDinny and me in King Island'
+    },
+    {
+      src: '/painting1.jpg',
+      alt: 'Painting of cover of book by Finn and Daen',
+      title: 'Painting of cover of book by Finn and Daen'
+    },
+    {
+      src: '/painting2.jpg',
+      alt: 'Painting the book cover',
+      title: 'Painting the book cover'
+    },
+    {
+      src: '/painting3.jpg',
+      alt: 'Painting the book cover',
+      title: 'Painting the book cover'
     }
   ]
 

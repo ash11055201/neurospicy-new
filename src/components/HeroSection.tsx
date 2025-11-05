@@ -91,7 +91,7 @@ export default function HeroSection() {
             </div>
             {/* Artist Attribution */}
             <p className="text-center text-gray-600 text-sm mt-4 italic">
-              Painted by Finn O&apos;Shea
+              Painted by Finn O&apos;Shea and Daen Calebrano
             </p>
           </div>
         </div>
