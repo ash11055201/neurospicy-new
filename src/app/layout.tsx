@@ -10,8 +10,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Neurospicy | Breaking Down Dyslexia and ADHD Barriers by John O'Shea",
-  description: "Explore John O'Shea's inspiring 58-year journey with dyslexia and ADHD. A powerful memoir sharing experiences of neurodivergence, from bestselling author to Aboriginal community member, world traveler, and founder of educational programs. Discover how embracing your 'spicy brain' can lead to extraordinary achievements.",
+  title: "Neurospicy By John O'Shea | Breaking Down Dyslexia and ADHD Barriers",
+  description: "Neurospicy By John O'Shea. A transformative memoir exploring neurodivergence through the lens of 58 years of lived experience. Discover how embracing dyslexia and ADHD as gifts can unlock extraordinary potential and reshape understanding of what it means to have a 'spicy brain'.",
   keywords: "dyslexia, ADHD, neurodivergent, John O'Shea, spicy brain, neurospicy, book, memoir, inspiration, neurodivergence, learning differences, ADHD support, dyslexia support, memoir, autobiography",
   authors: [{ name: "John O'Shea" }],
   icons: {
@@ -20,8 +20,8 @@ export const metadata: Metadata = {
     shortcut: '/book-cover.jpg',
   },
   openGraph: {
-    title: "Neurospicy | Breaking Down Dyslexia and ADHD Barriers",
-    description: "John O'Shea's inspiring 58-year journey with dyslexia and ADHD. A powerful memoir sharing experiences of neurodivergence, success, challenges, and the transformative power of embracing your 'spicy brain'.",
+    title: "Neurospicy By John O'Shea | Breaking Down Dyslexia and ADHD Barriers",
+    description: "Neurospicy By John O'Shea. A transformative memoir exploring neurodivergence through the lens of 58 years of lived experience. Discover how embracing dyslexia and ADHD as gifts can unlock extraordinary potential.",
     url: "https://neurospicy.life",
     siteName: "Neurospicy",
     images: [
@@ -37,8 +37,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Neurospicy | Breaking Down Dyslexia and ADHD Barriers",
-    description: "John O'Shea's inspiring 58-year journey with dyslexia and ADHD. Discover the power of embracing your 'spicy brain'.",
+    title: "Neurospicy By John O'Shea | Breaking Down Dyslexia and ADHD Barriers",
+    description: "Neurospicy By John O'Shea. A transformative memoir exploring neurodivergence through 58 years of lived experience. Discover the power of embracing your 'spicy brain'.",
     images: ["/og-image.jpg"],
   },
   robots: {
