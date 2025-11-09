@@ -188,8 +188,8 @@ export default function GallerySection() {
           </button>
         </div>
 
-        {/* Thumbnail Navigation */}
-        <div className="flex justify-center space-x-3 mb-6">
+        {/* Thumbnail Navigation - Hidden on mobile, shown on desktop */}
+        <div className="hidden md:flex justify-center space-x-3 mb-6">
           {images.map((image, index) => (
             <button
               key={index}
@@ -217,8 +217,8 @@ export default function GallerySection() {
           ))}
         </div>
 
-        {/* Image Counter */}
-        <div className="text-center">
+        {/* Image Counter - Hidden on mobile, shown on desktop */}
+        <div className="hidden md:block text-center">
           <p className="text-gray-600">
             {currentImageIndex + 1} of {images.length}
           </p>
