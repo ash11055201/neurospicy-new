@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: "your-google-verification-code",
+    google: "XGq9r78E32gxEHgBDHUyprs57LbWnXq0qeFKDiRnny0",
   },
 };
 
@@ -66,6 +66,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="canonical" href="https://neurospicy.life" />
+        <meta name="google-site-verification" content="XGq9r78E32gxEHgBDHUyprs57LbWnXq0qeFKDiRnny0" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#2563eb" />
         <link rel="icon" type="image/jpeg" href="/book-cover.jpg" sizes="any" />
