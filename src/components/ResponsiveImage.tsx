@@ -42,7 +42,7 @@ function useIsMobile() {
 /**
  * Get the appropriate image path based on device type
  */
-function getResponsiveImagePath(basePath: string, isMobile: boolean, fallback?: string): string {
+function getResponsiveImagePath(basePath: string, isMobile: boolean): string {
   // Extract extension and base name
   const lastDot = basePath.lastIndexOf('.')
   const ext = basePath.substring(lastDot)

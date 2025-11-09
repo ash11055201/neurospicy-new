@@ -3,10 +3,18 @@
 import { useState } from 'react'
 import ResponsiveImage from './ResponsiveImage'
 
+interface GalleryImage {
+  src: string
+  alt: string
+  title: string
+  fallback?: string
+  useResponsive?: boolean
+}
+
 export default function GallerySection() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
-  const images = [
+  const images: GalleryImage[] = [
     {
       src: '/IMG_0391.webp',
       alt: 'First Book',
@@ -145,8 +153,8 @@ export default function GallerySection() {
                       sizes="(max-width: 768px) 100vw, (max-width: 1280px) 80vw, 1024px"
                       className="object-cover rounded-lg"
                       priority={index === 0}
-                      fallback={(image as any).fallback}
-                      useResponsive={(image as any).useResponsive || false}
+                      fallback={image.fallback}
+                      useResponsive={image.useResponsive || false}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded-lg"></div>
                     <div className="absolute bottom-4 left-4 right-4 text-white">
@@ -201,8 +209,8 @@ export default function GallerySection() {
                 sizes="(max-width: 768px) 80px, 96px"
                 className="object-cover group-hover:brightness-110 transition-all duration-300"
                 priority={false}
-                fallback={(image as any).fallback}
-                useResponsive={(image as any).useResponsive || false}
+                fallback={image.fallback}
+                useResponsive={image.useResponsive || false}
               />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300"></div>
             </button>
