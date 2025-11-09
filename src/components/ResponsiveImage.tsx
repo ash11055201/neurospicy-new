@@ -85,15 +85,21 @@ export default function ResponsiveImage({
   let imagePath: string
   
   // Only try responsive versions if explicitly enabled
-  if (useResponsive && mounted && !imageError) {
-    // Try responsive version first
-    imagePath = getResponsiveImagePath(src, isMobile)
-  } else if (useResponsive && imageError && fallback) {
-    // Use fallback if responsive version failed
-    imagePath = fallback
-  } else if (useResponsive && !mounted && fallback) {
-    // Use fallback during SSR
-    imagePath = fallback
+  if (useResponsive) {
+    if (mounted && !imageError) {
+      // Client-side: try responsive version first
+      imagePath = getResponsiveImagePath(src, isMobile)
+    } else if (imageError && fallback) {
+      // Use fallback if responsive version failed
+      imagePath = fallback
+    } else if (!mounted) {
+      // SSR: Use mobile version by default (smaller, will be corrected on client if desktop)
+      // This avoids loading huge fallback images during SSR
+      imagePath = getResponsiveImagePath(src, true) // Default to mobile for SSR
+    } else {
+      // Fallback to original src (shouldn't happen if mobile/desktop versions exist)
+      imagePath = fallback || src
+    }
   } else {
     // Use original src directly (no responsive versions)
     imagePath = src

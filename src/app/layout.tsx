@@ -10,13 +10,18 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Neurospicy - Breaking Down Dyslexia and ADHD Barriers | John O'Shea",
-  description: "John O'Shea's inspiring journey with dyslexia and ADHD. A follow-up book exploring 30+ years of experience with neurodivergence, success, challenges, and the power of having a 'spicy brain'.",
-  keywords: "dyslexia, ADHD, neurodivergent, John O'Shea, spicy brain, neurospicy, book, memoir, inspiration",
+  title: "Neurospicy | Breaking Down Dyslexia and ADHD Barriers by John O'Shea",
+  description: "Explore John O'Shea's inspiring 58-year journey with dyslexia and ADHD. A powerful memoir sharing experiences of neurodivergence, from bestselling author to Aboriginal community member, world traveler, and founder of educational programs. Discover how embracing your 'spicy brain' can lead to extraordinary achievements.",
+  keywords: "dyslexia, ADHD, neurodivergent, John O'Shea, spicy brain, neurospicy, book, memoir, inspiration, neurodivergence, learning differences, ADHD support, dyslexia support, memoir, autobiography",
   authors: [{ name: "John O'Shea" }],
+  icons: {
+    icon: '/book-cover.jpg',
+    apple: '/book-cover.jpg',
+    shortcut: '/book-cover.jpg',
+  },
   openGraph: {
-    title: "Neurospicy - Breaking Down Dyslexia and ADHD Barriers",
-    description: "John O'Shea's inspiring journey with dyslexia and ADHD. Discover the power of having a 'spicy brain'.",
+    title: "Neurospicy | Breaking Down Dyslexia and ADHD Barriers",
+    description: "John O'Shea's inspiring 58-year journey with dyslexia and ADHD. A powerful memoir sharing experiences of neurodivergence, success, challenges, and the transformative power of embracing your 'spicy brain'.",
     url: "https://neurospicy.life",
     siteName: "Neurospicy",
     images: [
@@ -24,7 +29,7 @@ export const metadata: Metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Neurospicy Book Cover",
+        alt: "Neurospicy Book Cover by John O'Shea",
       },
     ],
     locale: "en_US",
@@ -32,8 +37,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Neurospicy - Breaking Down Dyslexia and ADHD Barriers",
-    description: "John O'Shea's inspiring journey with dyslexia and ADHD.",
+    title: "Neurospicy | Breaking Down Dyslexia and ADHD Barriers",
+    description: "John O'Shea's inspiring 58-year journey with dyslexia and ADHD. Discover the power of embracing your 'spicy brain'.",
     images: ["/og-image.jpg"],
   },
   robots: {
@@ -63,9 +68,11 @@ export default function RootLayout({
         <link rel="canonical" href="https://neurospicy.life" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#2563eb" />
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/jpeg" href="/book-cover.jpg" sizes="any" />
+        <link rel="apple-touch-icon" href="/book-cover.jpg" />
         <link rel="manifest" href="/manifest.json" />
+        {/* Preload critical resources */}
+        <link rel="preload" as="image" href="/book-cover-mobile.webp" />
       </head>
       <body className={inter.className}>
         <CartProvider>
