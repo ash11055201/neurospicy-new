@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import ResponsiveImage from './ResponsiveImage'
 import GallerySection from './GallerySection'
 
 export default function AboutSection() {
@@ -20,13 +20,16 @@ export default function AboutSection() {
             <div className="relative">
               <div className="bg-white rounded-2xl shadow-2xl p-4 transform hover:scale-105 transition-transform duration-500">
                 <div className="relative">
-                  <Image
-                    src="/John Photo.jpg"
+                  <ResponsiveImage
+                    src="/John Photo.webp"
                     alt="John O'Shea - Author of Neurospicy"
                     width={400}
                     height={800}
                     sizes="(max-width: 1024px) 100vw, 400px"
                     className="rounded-lg shadow-lg w-full h-[450px] object-cover"
+                    priority={false}
+                    fallback="/John Photo.jpg"
+                    useResponsive={true}
                   />
                   {/* Decorative Elements */}
                   <div className="absolute -top-2 -right-2 w-6 h-6 bg-orange-500 rounded-full animate-pulse"></div>
@@ -122,13 +125,14 @@ export default function AboutSection() {
           <div className="mb-8">
             <div className="relative inline-block">
               <div className="bg-white/20 backdrop-blur-sm rounded-xl p-6 shadow-2xl border border-white/30">
-                <Image
+                <ResponsiveImage
                   src="/Nasa.jpg"
                   alt="NASA Space Station - Symbol of Innovation and Problem-Solving"
                   width={600}
                   height={400}
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 80vw, 600px"
                   className="rounded-lg shadow-xl"
+                  priority={false}
                 />
                 <div className="absolute -top-3 -right-3 w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center animate-pulse shadow-lg">
                   <span className="text-black font-bold text-base">🚀</span>

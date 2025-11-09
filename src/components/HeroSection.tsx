@@ -1,7 +1,7 @@
 
 "use client"
 
-import Image from 'next/image'
+import ResponsiveImage from './ResponsiveImage'
 import { useRouter } from 'next/navigation'
 
 export default function HeroSection() {
@@ -71,14 +71,16 @@ export default function HeroSection() {
               {/* Book Cover with Enhanced Shadow */}
               <div className="bg-white rounded-2xl shadow-2xl p-6 transform hover:scale-105 transition-transform duration-500 hover:shadow-3xl">
                 <div className="relative">
-                  <Image
-                    src="/book-cover.jpg"
+                  <ResponsiveImage
+                    src="/book-cover.webp"
                     alt="Neurospicy Book Cover by John O'Shea"
                     width={400}
                     height={750}
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 400px"
                     className="rounded-lg shadow-lg"
                     priority
+                    fallback="/book-cover.jpg"
+                    useResponsive={true}
                   />
                   {/* Decorative Elements */}
                   <div className="absolute -top-2 -right-2 w-6 h-6 bg-orange-500/80 rounded-full animate-pulse"></div>

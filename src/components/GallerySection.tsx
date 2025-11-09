@@ -1,16 +1,18 @@
 'use client'
 
 import { useState } from 'react'
-import Image from 'next/image'
+import ResponsiveImage from './ResponsiveImage'
 
 export default function GallerySection() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
   const images = [
     {
-      src: '/IMG_0391.jpg',
+      src: '/IMG_0391.webp',
       alt: 'First Book',
-      title: 'First Book: Dyslexia: How Do We Learn'
+      title: 'First Book: Dyslexia: How Do We Learn',
+      fallback: '/IMG_0391.jpg',
+      useResponsive: true
     },
     {
       src: '/IMG_5962.jpeg',
@@ -38,9 +40,11 @@ export default function GallerySection() {
       title: 'Family and friends visiting McArthur River'
     },
     {
-      src: '/IMG_6903.jpeg',
+      src: '/IMG_6903.webp',
       alt: 'Nancy McDinny Grand Doughty Dinny McDinny and me in King Island',
-      title: 'Nancy McDinny Grand Doughty Dinny McDinny and me in King Island'
+      title: 'Nancy McDinny Grand Doughty Dinny McDinny and me in King Island',
+      fallback: '/IMG_6903.jpeg',
+      useResponsive: true
     },
     {
       src: '/painting1.jpg',
@@ -134,12 +138,15 @@ export default function GallerySection() {
               {images.map((image, index) => (
                 <div key={index} className="w-full flex-shrink-0">
                   <div className="relative h-[500px] md:h-[600px]">
-                    <Image
+                    <ResponsiveImage
                       src={image.src}
                       alt={image.alt}
                       fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1280px) 80vw, 1024px"
                       className="object-cover rounded-lg"
                       priority={index === 0}
+                      fallback={(image as any).fallback}
+                      useResponsive={(image as any).useResponsive || false}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded-lg"></div>
                     <div className="absolute bottom-4 left-4 right-4 text-white">
@@ -187,11 +194,15 @@ export default function GallerySection() {
               aria-label={`View image ${index + 1}: ${image.title}`}
               aria-current={index === currentImageIndex ? "true" : undefined}
             >
-              <Image
+              <ResponsiveImage
                 src={image.src}
                 alt={image.alt}
                 fill
+                sizes="(max-width: 768px) 80px, 96px"
                 className="object-cover group-hover:brightness-110 transition-all duration-300"
+                priority={false}
+                fallback={(image as any).fallback}
+                useResponsive={(image as any).useResponsive || false}
               />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300"></div>
             </button>
