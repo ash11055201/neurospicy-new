@@ -76,6 +76,7 @@ export default function HeroSection() {
                     alt="Neurospicy Book Cover by John O'Shea"
                     width={400}
                     height={750}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 400px"
                     className="rounded-lg shadow-lg"
                     priority
                   />

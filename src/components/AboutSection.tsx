@@ -25,6 +25,7 @@ export default function AboutSection() {
                     alt="John O'Shea - Author of Neurospicy"
                     width={400}
                     height={800}
+                    sizes="(max-width: 1024px) 100vw, 400px"
                     className="rounded-lg shadow-lg w-full h-[450px] object-cover"
                   />
                   {/* Decorative Elements */}
@@ -126,6 +127,7 @@ export default function AboutSection() {
                   alt="NASA Space Station - Symbol of Innovation and Problem-Solving"
                   width={600}
                   height={400}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 80vw, 600px"
                   className="rounded-lg shadow-xl"
                 />
                 <div className="absolute -top-3 -right-3 w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center animate-pulse shadow-lg">

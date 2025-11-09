@@ -8,7 +8,7 @@ export default function GallerySection() {
 
   const images = [
     {
-      src: '/IMG_0391.jpeg',
+      src: '/IMG_0391.jpg',
       alt: 'First Book',
       title: 'First Book: Dyslexia: How Do We Learn'
     },
@@ -34,8 +34,8 @@ export default function GallerySection() {
     },
     {
       src: '/IMG_6713.jpeg',
-      alt: 'Family and friends visiting McArthur River from near Borroloola 2023',
-      title: 'Family and friends visiting McArthur River from near Borroloola 2023'
+      alt: 'Family and friends visiting McArthur River',
+      title: 'Family and friends visiting McArthur River'
     },
     {
       src: '/IMG_6903.jpeg',
@@ -44,8 +44,8 @@ export default function GallerySection() {
     },
     {
       src: '/painting1.jpg',
-      alt: 'Painting of cover of book by Finn and Daen',
-      title: 'Painting of cover of book by Finn and Daen'
+      alt: 'Painting of cover book by Finn and Daen',
+      title: 'Painting of cover book by Finn and Daen'
     },
     {
       src: '/painting2.jpg',
@@ -56,6 +56,51 @@ export default function GallerySection() {
       src: '/painting3.jpg',
       alt: 'Painting the book cover',
       title: 'Painting the book cover'
+    },
+    {
+      src: '/john surfing.jpg',
+      alt: 'Surfing at Uluwatu Bali',
+      title: 'Catching waves at the legendary surf break of Uluwatu in Bali'
+    },
+    {
+      src: '/john surfing 2.jpg',
+      alt: 'Surfing at Uluwatu Bali',
+      title: 'Catching waves at the legendary surf break of Uluwatu in Bali'
+    },
+    {
+      src: '/Mike Nemesvary.png',
+      alt: 'Mike Nemesvary former Bond stuntman',
+      title: 'Mike Nemesvary, a former Bond stuntman, whom I cared for as a nurse after he broke his back'
+    },
+    {
+      src: '/Mike Nemesvary.jpg',
+      alt: 'Mike Nemesvary in London',
+      title: 'Mike Nemesvary, whom I worked as a nurse for in London'
+    },
+    {
+      src: '/working bee.jpg',
+      alt: 'Working bee at Wollangarra',
+      title: 'My children participating in a working bee at Wollangarra'
+    },
+    {
+      src: '/Damper and fish.jpg',
+      alt: 'Preparing damper and fish',
+      title: 'Anny and Nancy McDinny getting ready to prepare damper and fish'
+    },
+    {
+      src: '/camping.jpg',
+      alt: 'Camping with tents',
+      title: 'Camping with tents, an experience I would rather avoid'
+    },
+    {
+      src: '/Eileen McDinny.jpg',
+      alt: 'Eileen McDinny at Borroloola',
+      title: 'Eileen McDinny, my Aboriginal mother, at Borroloola'
+    },
+    {
+      src: '/rock climbing.jpg',
+      alt: 'Rock climbing at Mount Arapiles',
+      title: 'Rock climbing at Mount Arapiles, where the motto is: if you are not flying, you are not trying'
     }
   ]
 
@@ -139,6 +184,8 @@ export default function GallerySection() {
                   ? 'ring-4 ring-orange-500/90 scale-110 shadow-lg' 
                   : 'hover:scale-110 hover:shadow-lg opacity-70 hover:opacity-100 hover:ring-2 hover:ring-orange-300/50'
               }`}
+              aria-label={`View image ${index + 1}: ${image.title}`}
+              aria-current={index === currentImageIndex ? "true" : undefined}
             >
               <Image
                 src={image.src}

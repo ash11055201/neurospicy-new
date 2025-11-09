@@ -1,0 +1,18 @@
+{
+  "name": "Neurospicy - Breaking Down Dyslexia and ADHD Barriers",
+  "short_name": "Neurospicy",
+  "description": "John O'Shea's inspiring journey with dyslexia and ADHD. A follow-up book exploring 30+ years of experience with neurodivergence, success, challenges, and the power of having a 'spicy brain'.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ]
+}
+

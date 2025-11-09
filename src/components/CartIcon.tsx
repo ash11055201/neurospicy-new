@@ -14,6 +14,7 @@ export default function CartIcon({ onClick }: CartIconProps) {
     <button
       onClick={onClick}
       className="text-gray-800 hover:text-orange-600 hover:bg-orange-50 px-3 py-2 text-sm font-medium transition-all duration-200 rounded-lg cursor-pointer relative inline-flex items-center"
+      aria-label={`Shopping cart${totalItems > 0 ? ` with ${totalItems} item${totalItems > 1 ? 's' : ''}` : ''}`}
     >
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <circle cx="9" cy="21" r="1" />
