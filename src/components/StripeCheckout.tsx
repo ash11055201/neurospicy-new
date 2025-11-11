@@ -151,7 +151,7 @@ export default function StripeCheckout({
           },
           body: JSON.stringify({
             amount,
-            currency: 'usd',
+            currency: 'aud',
             metadata: {
               format,
               quantity: quantity.toString(),
