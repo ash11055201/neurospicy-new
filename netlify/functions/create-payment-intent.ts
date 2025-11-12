@@ -51,7 +51,7 @@ export const handler: Handler = async (event) => {
 
   try {
     const body: RequestBody = JSON.parse(event.body || '{}')
-    const { amount, currency = 'aud', metadata } = body
+    const { amount, currency = 'usd', metadata } = body
 
     if (!amount || amount <= 0) {
       return {
