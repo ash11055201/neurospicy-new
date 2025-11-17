@@ -29,7 +29,7 @@ export default function CheckoutPage() {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [paymentMethod, setPaymentMethod] = useState<'stripe' | null>(null)
   const [isFormValid, setIsFormValid] = useState(false)
-  const { addToCart } = useCart()
+  const { addToCart, items, updateQuantity } = useCart()
   const router = useRouter()
 
   const coverImages = [
@@ -84,13 +84,26 @@ export default function CheckoutPage() {
 
 
   const handleStripeCheckout = () => {
-    addToCart({
-      title: 'Neurospicy',
-      format: selectedFormat,
-      price: getPrice(),
-      quantity: quantity,
-      sku: selectedFormat === 'ebook' ? '3001' : selectedFormat === 'paperback' ? '1001' : '2001'
-    })
+    const sku = selectedFormat === 'ebook' ? '3001' : selectedFormat === 'paperback' ? '1001' : '2001'
+    const itemId = `${selectedFormat}-${sku}`
+    
+    // Check if item already exists in cart
+    const existingItem = items.find(item => item.id === itemId)
+    
+    if (existingItem) {
+      // Update quantity instead of adding to it
+      updateQuantity(itemId, quantity)
+    } else {
+      // Add new item to cart
+      addToCart({
+        title: 'Neurospicy',
+        format: selectedFormat,
+        price: getPrice(),
+        quantity: quantity,
+        sku: sku
+      })
+    }
+    
     setPaymentMethod('stripe')
     setShowCheckoutForm(true)
     // Reset form validation when opening
