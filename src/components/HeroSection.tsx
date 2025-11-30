@@ -38,6 +38,31 @@ export default function HeroSection() {
               </p>
             </div>
 
+            {/* Reader Responses */}
+            <div className="mb-8 max-w-4xl mx-auto lg:mx-0">
+              <p className="text-lg md:text-xl font-semibold text-gray-800 mb-4 italic text-center lg:text-left">
+                Recent reader responses have been incredibly moving:
+              </p>
+              <div className="space-y-4">
+                <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-md p-5 md:p-6 border-l-4 border-orange-500/70">
+                  <p className="text-base md:text-lg text-gray-700 leading-relaxed italic mb-3 text-left">
+                    &ldquo;I finished Neurospicy last night in the dark — day four with no electricity — and I enjoyed every sentence. It made me laugh, cry, and giggle. You are one big inspiration and a man of strength and resilience. I loved every bit!&rdquo;
+                  </p>
+                  <p className="text-sm md:text-base text-gray-600 font-medium text-right">
+                    — Issy Rubanhiner
+                  </p>
+                </div>
+                <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-md p-5 md:p-6 border-l-4 border-red-500/70">
+                  <p className="text-base md:text-lg text-gray-700 leading-relaxed italic mb-3 text-left">
+                    &ldquo;Profoundly relatable, irreverent, and inspiring… I love the way you reframe dyslexia and ADHD as sources of creativity, grit, and unconventional wisdom. It&apos;s candid, fun, and honest — blending vivid travel stories, entrepreneurial highs, catastrophic failures, and hard-earned lessons into a guide for anyone with a &apos;spicy&apos; brain… or loving someone who does.&rdquo;
+                  </p>
+                  <p className="text-sm md:text-base text-gray-600 font-medium text-right">
+                    — Fitforjoy Podcast
+                  </p>
+                </div>
+              </div>
+            </div>
+
             {/* CTA Buttons */}
             <div className="mb-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <button 
@@ -53,21 +78,12 @@ export default function HeroSection() {
                 Get the Book Now
               </button>
             </div>
-
-            {/* Main Quote */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-lg p-6 max-w-4xl mx-auto lg:mx-0">
-              <h3 className="text-xl md:text-2xl font-semibold text-red-600 mb-4">
-                In my experience
-              </h3>
-              <p className="text-base md:text-lg text-gray-700 leading-relaxed">
-                Success and failure are two sides of the same coin. By sharing my personal experiences of both, especially as they relate to my dyslexia and ADHD (which I playfully call Spicy in the book), I hope to offer useful insights to others.
-              </p>
-            </div>
           </div>
 
-          {/* Right Column - Book Cover */}
+          {/* Right Column - Book Cover and Quote */}
           <div className="flex flex-col items-center lg:items-end">
-            <div className="relative">
+            {/* Book Cover - Moved Up */}
+            <div className="relative mb-6">
               {/* Book Cover with Enhanced Shadow */}
               <div className="bg-white rounded-2xl shadow-2xl p-6 transform hover:scale-105 transition-transform duration-500 hover:shadow-3xl">
                 <div className="relative">
@@ -92,10 +108,21 @@ export default function HeroSection() {
               <div className="absolute -top-4 -left-4 w-8 h-8 bg-yellow-400 rounded-full opacity-60 animate-bounce"></div>
               <div className="absolute -bottom-4 -right-4 w-6 h-6 bg-orange-400/80 rounded-full opacity-60 animate-bounce delay-500"></div>
             </div>
+            
             {/* Artist Attribution */}
-            <p className="text-center text-gray-600 text-sm mt-4 italic">
+            <p className="text-center text-gray-600 text-sm mb-6 italic">
               Painted by Finn O&apos;Shea and Daen Calebrano
             </p>
+
+            {/* Main Quote - Below Photo */}
+            <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-lg p-6 w-full max-w-md">
+              <h3 className="text-xl md:text-2xl font-semibold text-red-600 mb-4">
+                In my experience
+              </h3>
+              <p className="text-base md:text-lg text-gray-700 leading-relaxed">
+                Success and failure are two sides of the same coin. By sharing my personal experiences of both, especially as they relate to my dyslexia and ADHD (which I playfully call Spicy in the book), I hope to offer useful insights to others.
+              </p>
+            </div>
           </div>
         </div>
       </div>
