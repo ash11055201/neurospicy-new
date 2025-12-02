@@ -14,12 +14,19 @@ const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ''
 )
 
+interface ShippingInfo {
+  cost: number
+  level?: string
+  carrier?: string
+}
+
 interface StripeCheckoutProps {
   amount: number
   format: string
   quantity: number
   discountCode: string
   customerEmail?: string
+  shippingInfo?: ShippingInfo
   onSuccess?: () => void
   onError?: (error: string) => void
 }
@@ -134,6 +141,7 @@ export default function StripeCheckout({
   quantity,
   discountCode,
   customerEmail,
+  shippingInfo,
   onSuccess,
   onError,
 }: StripeCheckoutProps) {
@@ -157,6 +165,8 @@ export default function StripeCheckout({
               quantity: quantity.toString(),
               discountCode: discountCode || '',
               customerEmail: customerEmail || '',
+              shippingLevel: shippingInfo?.level || '',
+              shippingCarrier: shippingInfo?.carrier || '',
             },
           }),
         })
@@ -178,7 +188,7 @@ export default function StripeCheckout({
     }
 
     createPaymentIntent()
-  }, [amount, format, quantity, discountCode, customerEmail, onError])
+  }, [amount, format, quantity, discountCode, customerEmail, shippingInfo, onError])
 
   if (!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY) {
     return (
