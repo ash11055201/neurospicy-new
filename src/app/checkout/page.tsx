@@ -189,7 +189,7 @@ export default function CheckoutPage() {
   // STEP 2: Add function to fetch available shipping options with prices
   // ==================================================================
 
-  const fetchShippingOptions = useCallback(async () => {
+  const fetchShippingOptions = async () => {
     if (!isPhysicalFormat) return [];
 
     try {
@@ -248,7 +248,7 @@ export default function CheckoutPage() {
     } finally {
       setIsLoadingShipping(false)
     }
-  }, [])
+  }
 
   // ==================================================================
   // STEP 4: Add useEffect to fetch shipping options when address is filled
