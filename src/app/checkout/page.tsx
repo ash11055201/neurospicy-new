@@ -1,6 +1,6 @@
 "use client"
-
-import { useEffect, useState } from 'react'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useCallback, useEffect, useState } from 'react'
 import Image from 'next/image'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
@@ -80,8 +80,6 @@ export default function CheckoutPage() {
     paperback: 35.00,
     hardcover: 40.00
   }
-
-  console.log('selectedShippingOption', selectedShippingOption);
 
   // Calculate price with discount
   const getPrice = () => {
@@ -191,7 +189,7 @@ export default function CheckoutPage() {
   // STEP 2: Add function to fetch available shipping options with prices
   // ==================================================================
 
-  const fetchShippingOptions = async () => {
+  const fetchShippingOptions = useCallback(async () => {
     if (!isPhysicalFormat) return [];
 
     try {
@@ -250,7 +248,7 @@ export default function CheckoutPage() {
     } finally {
       setIsLoadingShipping(false)
     }
-  }
+  }, [])
 
   // ==================================================================
   // STEP 4: Add useEffect to fetch shipping options when address is filled
@@ -352,7 +350,7 @@ export default function CheckoutPage() {
     })
 
     const data = await responseLulu.json();
-    let isValid = true;
+    const isValid = true;
     if (!responseLulu.ok) {
       // isValid = false
       // alert('Lulu API Error: ' + JSON.stringify(data, null, 2));
