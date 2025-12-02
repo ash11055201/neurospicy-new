@@ -34,7 +34,6 @@ export default function CheckoutPage() {
   const [paymentMethod, setPaymentMethod] = useState<'stripe' | null>(null)
   const [isFormValid, setIsFormValid] = useState(false)
   const isPhysicalFormat = selectedFormat === 'paperback' || selectedFormat === 'hardcover'
-  const [isAddressValid, setIsAddressValid] = useState(!isPhysicalFormat ? true : false)
   const { addToCart, items, updateQuantity } = useCart()
   const router = useRouter()
   const [availableShippingOptions, setAvailableShippingOptions] = useState<any[]>([])
@@ -389,7 +388,6 @@ export default function CheckoutPage() {
         errorMessage += '• State code must be valid for the country';
       }
 
-      setIsAddressValid(false)
       setIsFormValid(false)
       setSubmitStatus('error')
 
@@ -398,7 +396,6 @@ export default function CheckoutPage() {
 
       return false;
     }
-    setIsAddressValid(isValid)
     setIsFormValid(isValid)
     return isValid;
   }
@@ -435,10 +432,9 @@ export default function CheckoutPage() {
 
   useEffect(() => {
     if (!isPhysicalFormat) {
-      setIsAddressValid(true)
       setIsFormValid(validateForm())
     } else {
-      setIsAddressValid(false)
+      
       setIsFormValid(false)
     }
   }, [selectedFormat, isPhysicalFormat])
